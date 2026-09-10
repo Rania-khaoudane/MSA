@@ -1,0 +1,873 @@
+[
+  {
+    "id": "b005",
+    "msa_query": "متى تأسست جامعة القرويين؟",
+    "darija_query": "إمتى تأسست جامعة القرويين؟",
+    "gold_answer": "تأسست جامعة القرويين سنة 859 ميلادية.",
+    "source_chunk_id": "chunk_003",
+    "source_chunk_text": "تأسست جامعة القرويين سنة 859 ميلادية في مدينة فاس على يد فاطمة الفهرية، وتعتبر من أقدم الجامعات في العالم التي ما زالت تمارس نشاطها التعليمي حتى اليوم.",
+    "flags": [
+      "DUPLICATE: near-duplicate of b006 (similarity 0.946)"
+    ]
+  },
+  {
+    "id": "b006",
+    "msa_query": "من أسس جامعة القرويين؟",
+    "darija_query": "شكون لي أسس جامعة القرويين؟",
+    "gold_answer": "أسستها فاطمة الفهرية.",
+    "source_chunk_id": "chunk_003",
+    "source_chunk_text": "تأسست جامعة القرويين سنة 859 ميلادية في مدينة فاس على يد فاطمة الفهرية، وتعتبر من أقدم الجامعات في العالم التي ما زالت تمارس نشاطها التعليمي حتى اليوم.",
+    "flags": [
+      "DUPLICATE: near-duplicate of b005 (similarity 0.946)"
+    ]
+  },
+  {
+    "id": "b014",
+    "msa_query": "ما هي أهم المحاصيل الزراعية المذكورة؟",
+    "darija_query": "شنو هما أهم الغلات الفلاحية لي تهضرات عليهم؟",
+    "gold_answer": "زراعة الحبوب والزيتون والحوامض.",
+    "source_chunk_id": "chunk_007",
+    "source_chunk_text": "تعتبر الفلاحة من أهم القطاعات الاقتصادية في المغرب، حيث تشغل نسبة كبيرة من اليد العاملة، وتساهم زراعة الحبوب والزيتون والحوامض بشكل أساسي في الإنتاج الوطني.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b018",
+    "msa_query": "هل نظام التعليم يشمل مرحلة إعدادية بعد الابتدائي؟",
+    "darija_query": "واش نظام التعليم فيه مرحلة إعدادية من بعد الابتدائي؟",
+    "gold_answer": "نعم، تليها مرحلة إعدادية وثانوية.",
+    "source_chunk_id": "chunk_004",
+    "source_chunk_text": "يعتمد نظام التعليم في المغرب على مرحلة ابتدائية مدتها ست سنوات، تليها مرحلة إعدادية وثانوية. التعليم الابتدائي إلزامي ومجاني في المؤسسات العمومية.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b023",
+    "msa_query": "كم يبلغ الحد الأدنى للأجور في القطاع الخاص بالمغرب؟",
+    "darija_query": "شحال هو السميك ديال القطاع الخاص فالمغرب؟",
+    "gold_answer": "يبلغ الحد الأدنى للأجور ما يقارب 3111 درهماً شهرياً.",
+    "source_chunk_id": "chunk_010",
+    "source_chunk_text": "يبلغ الحد الأدنى للأجور في القطاع الخاص بالمغرب، المعروف اختصاراً بالسميك، ما يقارب 3111 درهماً شهرياً، مع مراجعات دورية تحددها الحكومة بالتشاور مع النقابات وأرباب العمل.",
+    "flags": [
+      "GROUNDING: NO — LLM judge says answer not fully supported by source_chunk_text; verify carefully"
+    ]
+  },
+  {
+    "id": "b024",
+    "msa_query": "من يحدد مراجعة الحد الأدنى للأجور؟",
+    "darija_query": "شكون لي كيحدد مراجعة السميك؟",
+    "gold_answer": "تحددها الحكومة بالتشاور مع النقابات وأرباب العمل.",
+    "source_chunk_id": "chunk_010",
+    "source_chunk_text": "يبلغ الحد الأدنى للأجور في القطاع الخاص بالمغرب، المعروف اختصاراً بالسميك، ما يقارب 3111 درهماً شهرياً، مع مراجعات دورية تحددها الحكومة بالتشاور مع النقابات وأرباب العمل.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b039",
+    "msa_query": "ما هو هدف برنامج المغرب الرقمي؟",
+    "darija_query": "شنو هو الهدف ديال برنامج المغرب الرقمي؟",
+    "gold_answer": "تسريع التحول الرقمي للإدارة العمومية.",
+    "source_chunk_id": "chunk_018",
+    "source_chunk_text": "أطلقت الحكومة المغربية برنامج المغرب الرقمي بهدف تسريع التحول الرقمي للإدارة العمومية، ويشمل البرنامج رقمنة الخدمات الإدارية وتوسيع الولوج إلى الإنترنت عالي الصبيب في المناطق القروية.",
+    "flags": [
+      "DUPLICATE: near-duplicate of b040 (similarity 0.959)"
+    ]
+  },
+  {
+    "id": "b040",
+    "msa_query": "ماذا يشمل برنامج المغرب الرقمي؟",
+    "darija_query": "أش كيشمل برنامج المغرب الرقمي؟",
+    "gold_answer": "رقمنة الخدمات الإدارية وتوسيع الولوج إلى الإنترنت عالي الصبيب في المناطق القروية.",
+    "source_chunk_id": "chunk_018",
+    "source_chunk_text": "أطلقت الحكومة المغربية برنامج المغرب الرقمي بهدف تسريع التحول الرقمي للإدارة العمومية، ويشمل البرنامج رقمنة الخدمات الإدارية وتوسيع الولوج إلى الإنترنت عالي الصبيب في المناطق القروية.",
+    "flags": [
+      "DUPLICATE: near-duplicate of b039 (similarity 0.959)"
+    ]
+  },
+  {
+    "id": "b047",
+    "msa_query": "في أي مدينة يقام مهرجان كناوة؟",
+    "darija_query": "فأي مدينة كيتقام مهرجان كناوة؟",
+    "gold_answer": "يقام في مدينة الصويرة.",
+    "source_chunk_id": "chunk_022",
+    "source_chunk_text": "يستقطب مهرجان كناوة وموسيقى العالم بمدينة الصويرة آلاف الزوار سنوياً، ويجمع بين الموسيقى الكناوية التقليدية وفنون موسيقية عالمية متنوعة في أجواء ساحلية مميزة.",
+    "flags": [
+      "DIALECT: 0 recognized Darija markers — may be lightly-edited MSA, not real dialect"
+    ]
+  },
+  {
+    "id": "b048",
+    "msa_query": "ما هي التقنية التي يعتمدها قطاع الفلاحة لترشيد استهلاك المياه؟",
+    "darija_query": "شنو هي التقنية لي كيعتمد عليها قطاع الفلاحة باش يرشد الما؟",
+    "gold_answer": "يعتمد بشكل متزايد على تقنيات الري الموضعي (الري بالتنقيط).",
+    "source_chunk_id": "chunk_023",
+    "source_chunk_text": "يعتمد قطاع الفلاحة المغربي بشكل متزايد على تقنيات الري الموضعي لترشيد استهلاك المياه، وقد استفادت آلاف الهكتارات من برامج تحويل الري التقليدي إلى الري بالتنقيط.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b050",
+    "msa_query": "أي دستور يضمن حرية الصحافة في المغرب؟",
+    "darija_query": "أي دستور كيضمن حرية الصحافة فالمغرب؟",
+    "gold_answer": "دستور 2011 يضمن حرية الصحافة والنشر.",
+    "source_chunk_id": "chunk_025",
+    "source_chunk_text": "يضمن الدستور المغربي لسنة 2011 حرية الصحافة والنشر، مع وجود قانون خاص بالصحافة والنشر ينظم حقوق وواجبات الصحفيين ويحدد الأطر القانونية لممارسة المهنة.",
+    "flags": [
+      "DIALECT: 0 recognized Darija markers — may be lightly-edited MSA, not real dialect"
+    ]
+  },
+  {
+    "id": "b053",
+    "msa_query": "ماذا يعرض الفلاحون والباعة في السوق الأسبوعي؟",
+    "darija_query": "أش كيبيعو الفلاحين والبياعة فالسوق؟",
+    "gold_answer": "يعرضون منتجاتهم من خضر وفواكه ومواشي مباشرة للمستهلكين.",
+    "source_chunk_id": "chunk_026",
+    "source_chunk_text": "تُقام الأسواق الأسبوعية (السوق) في أغلب المدن والقرى المغربية في يوم محدد من الأسبوع، حيث يعرض الفلاحون والباعة منتجاتهم من خضر وفواكه ومواشي مباشرة للمستهلكين، وتبقى المساومة على الأثمنة عادة شائعة هناك.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b057",
+    "msa_query": "في أي ساعة يبدأ الطرامواي عمله وفي أي ساعة يتوقف؟",
+    "darija_query": "فأي ساعة كيبدا الطرامواي وفأي ساعة كيوقف؟",
+    "gold_answer": "يشتغل يومياً من الساعة السادسة صباحاً إلى منتصف الليل تقريباً.",
+    "source_chunk_id": "chunk_028",
+    "source_chunk_text": "يشتغل الطرامواي في الدار البيضاء والرباط يومياً من الساعة السادسة صباحاً إلى منتصف الليل تقريباً، وتتراوح تذكرة الرحلة الواحدة حوالي 7 دراهم، مع وجود اشتراكات شهرية بثمن مخفض للمستعملين المنتظمين.",
+    "flags": [
+      "DIALECT: 0 recognized Darija markers — may be lightly-edited MSA, not real dialect"
+    ]
+  },
+  {
+    "id": "b059",
+    "msa_query": "هل توجد اشتراكات شهرية للطرامواي؟",
+    "darija_query": "واش كاين اشتراك شهري ديال الطرامواي؟",
+    "gold_answer": "نعم، توجد اشتراكات شهرية بثمن مخفض للمستعملين المنتظمين.",
+    "source_chunk_id": "chunk_028",
+    "source_chunk_text": "يشتغل الطرامواي في الدار البيضاء والرباط يومياً من الساعة السادسة صباحاً إلى منتصف الليل تقريباً، وتتراوح تذكرة الرحلة الواحدة حوالي 7 دراهم، مع وجود اشتراكات شهرية بثمن مخفض للمستعملين المنتظمين.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b060",
+    "msa_query": "ما هي شركات الاتصالات الثلاث الكبرى في المغرب؟",
+    "darija_query": "شنو هوما الشركات الكبار ديال الاتصالات فالمغرب؟",
+    "gold_answer": "اتصالات المغرب وأورونج وإنوي.",
+    "source_chunk_id": "chunk_029",
+    "source_chunk_text": "تقدم شركات الاتصالات الثلاث الكبرى في المغرب، اتصالات المغرب وأورونج وإنوي، عروضاً متنوعة لبطاقات الأنترنت المسبقة الأداء، تتراوح أثمنتها حسب حجم الرصيد ومدة الصلاحية، وتشهد المنافسة بينها عروضاً ترويجية متكررة.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b061",
+    "msa_query": "ما الذي يحدد ثمن بطاقات الأنترنت المسبقة الأداء؟",
+    "darija_query": "أش لي كيحدد ثمن الكارطة ديال الأنترنت؟",
+    "gold_answer": "تتراوح أثمنتها حسب حجم الرصيد ومدة الصلاحية.",
+    "source_chunk_id": "chunk_029",
+    "source_chunk_text": "تقدم شركات الاتصالات الثلاث الكبرى في المغرب، اتصالات المغرب وأورونج وإنوي، عروضاً متنوعة لبطاقات الأنترنت المسبقة الأداء، تتراوح أثمنتها حسب حجم الرصيد ومدة الصلاحية، وتشهد المنافسة بينها عروضاً ترويجية متكررة.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b064",
+    "msa_query": "ماذا يشرب الأصدقاء عادة عند لقائهم في المقهى؟",
+    "darija_query": "أش كيشربو الصحاب فالمقهى؟",
+    "gold_answer": "يحتسون أتاي (الشاي بالنعناع) أو القهوة.",
+    "source_chunk_id": "chunk_031",
+    "source_chunk_text": "يعتبر المقهى فضاءً اجتماعياً أساسياً في الحياة اليومية المغربية، حيث يلتقي الأصدقاء لاحتساء أتاي (الشاي بالنعناع) أو القهوة ومتابعة أخبار الرياضة، وتنتشر المقاهي بكثرة في جميع الأحياء والمدن.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b066",
+    "msa_query": "كيف تعمل الصيدليات خارج أوقات العمل العادية؟",
+    "darija_query": "كيفاش كتخدم الصيدليات منين توقف أوقات الخدمة العادية؟",
+    "gold_answer": "تعمل بنظام الحراسة بشكل تناوبي بين الصيدليات في كل مدينة.",
+    "source_chunk_id": "chunk_032",
+    "source_chunk_text": "تعمل بعض الصيدليات بنظام الحراسة (صيدلية الحراسة) خارج أوقات العمل العادية وأيام العطل، بشكل تناوبي بين الصيدليات في كل مدينة، لضمان توفر الأدوية للمرضى في كل الأوقات.",
+    "flags": [
+      "GROUNDING: NO — LLM judge says answer not fully supported by source_chunk_text; verify carefully"
+    ]
+  },
+  {
+    "id": "b067",
+    "msa_query": "ما هدف نظام صيدلية الحراسة؟",
+    "darija_query": "شنو هو الهدف ديال صيدلية الحراسة؟",
+    "gold_answer": "ضمان توفر الأدوية للمرضى في كل الأوقات.",
+    "source_chunk_id": "chunk_032",
+    "source_chunk_text": "تعمل بعض الصيدليات بنظام الحراسة (صيدلية الحراسة) خارج أوقات العمل العادية وأيام العطل، بشكل تناوبي بين الصيدليات في كل مدينة، لضمان توفر الأدوية للمرضى في كل الأوقات.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b069",
+    "msa_query": "اذكر مثالاً عن عطلة مدنية ثابتة في المغرب؟",
+    "darija_query": "عطيني مثال على عطلة مدنية ثابتة فالمغرب؟",
+    "gold_answer": "فاتح ماي أو عيد العرش أو ذكرى المسيرة الخضراء.",
+    "source_chunk_id": "chunk_033",
+    "source_chunk_text": "تشمل العطل الرسمية بالمغرب عيد الفطر وعيد الأضحى ورأس السنة الهجرية وعيد المولد النبوي حسب التقويم الهجري، بالإضافة إلى عطل مدنية ثابتة مثل فاتح ماي وعيد العرش وذكرى المسيرة الخضراء.",
+    "flags": [
+      "GROUNDING: NO — LLM judge says answer not fully supported by source_chunk_text; verify carefully",
+      "DIALECT: 0 recognized Darija markers — may be lightly-edited MSA, not real dialect"
+    ]
+  },
+  {
+    "id": "b071",
+    "msa_query": "ماذا يفعل الناس عادة في الحمام العمومي؟",
+    "darija_query": "أش كيديرو الناس فالحمام؟",
+    "gold_answer": "يذهبون للاغتسال والتدليك التقليدي.",
+    "source_chunk_id": "chunk_034",
+    "source_chunk_text": "يبقى الحمام العمومي التقليدي جزءاً من العادات اليومية أو الأسبوعية لدى كثير من المغاربة، حيث يذهب الناس للاغتسال والتدليك التقليدي، ويتراوح ثمن الدخول عادة بين 10 و20 درهماً حسب المدينة والخدمات الإضافية.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b073",
+    "msa_query": "ماذا يحدد عقد الكراء؟",
+    "darija_query": "أش كيحدد عقد الكراء؟",
+    "gold_answer": "يحدد مدة العقد وثمن الكراء الشهري وشروط الإخلاء.",
+    "source_chunk_id": "chunk_035",
+    "source_chunk_text": "عند كراء شقة سكنية في المغرب، يطلب المكري عادة إيداع وجيبة تعادل شهراً أو شهرين من الكراء كضمانة، بالإضافة إلى توقيع عقد كراء يحدد مدة العقد وثمن الكراء الشهري وشروط الإخلاء.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b076",
+    "msa_query": "ماذا يحدث لأثمنة الأغنام قبل عيد الأضحى؟",
+    "darija_query": "أش كيوقع للثمن ديال الغنم قبل عيد الأضحى؟",
+    "gold_answer": "ترتفع أثمنة الأغنام بشكل ملحوظ.",
+    "source_chunk_id": "chunk_037",
+    "source_chunk_text": "يشهد سوق الأضاحي إقبالاً كبيراً في الأسابيع التي تسبق عيد الأضحى، حيث ترتفع أثمنة الأغنام بشكل ملحوظ، وتحدد وزارة الفلاحة كل سنة توصيات لتنظيم أسواق بيع المواشي وضمان جودتها.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b080",
+    "msa_query": "ما الخدمات التي يوفرها بريد المغرب عبر بنك البريد؟",
+    "darija_query": "أش هي الخدمات لي كيوفرها بنك البريد؟",
+    "gold_answer": "خدمات التحويل المالي الداخلي والدولي، إلى جانب الادخار والحسابات البنكية.",
+    "source_chunk_id": "chunk_039",
+    "source_chunk_text": "يوفر بريد المغرب عبر بنك البريد خدمات التحويل المالي الداخلي والدولي، ويستعملها كثير من المغاربة المقيمين بالخارج لإرسال الأموال لعائلاتهم، إلى جانب خدمات الادخار والحسابات البنكية الأساسية.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b082",
+    "msa_query": "ماذا تميز عروض الأنترنت المنزلي عبر الألياف الضوئية؟",
+    "darija_query": "أش كيميز عروض الأنترنت ديال الفيبر؟",
+    "gold_answer": "أثمنة تنافسية وسرعات أعلى مقارنة بالتقنيات القديمة.",
+    "source_chunk_id": "chunk_040",
+    "source_chunk_text": "توسعت في السنوات الأخيرة عروض الأنترنت المنزلي عبر الألياف الضوئية في المدن المغربية الكبرى، بأثمنة تنافسية وسرعات أعلى مقارنة بالتقنيات القديمة، ما ساهم في تحسين جودة الاتصال داخل المنازل.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b083",
+    "msa_query": "ماذا حسّنت عروض الفيبر الضوئي في المنازل؟",
+    "darija_query": "أش حسنات عروض الفيبر فالدور؟",
+    "gold_answer": "ساهمت في تحسين جودة الاتصال داخل المنازل.",
+    "source_chunk_id": "chunk_040",
+    "source_chunk_text": "توسعت في السنوات الأخيرة عروض الأنترنت المنزلي عبر الألياف الضوئية في المدن المغربية الكبرى، بأثمنة تنافسية وسرعات أعلى مقارنة بالتقنيات القديمة، ما ساهم في تحسين جودة الاتصال داخل المنازل.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b088",
+    "msa_query": "هل الأنترنت عالي الصبيب متوفر في المناطق القروية؟",
+    "darija_query": "واش الأنترنت الفيبر كاين فالبوادي؟",
+    "gold_answer": "برنامج المغرب الرقمي يعمل على توسيع الولوج إلى الإنترنت عالي الصبيب في المناطق القروية.",
+    "source_chunk_id": "chunk_018",
+    "source_chunk_text": "أطلقت الحكومة المغربية برنامج المغرب الرقمي بهدف تسريع التحول الرقمي للإدارة العمومية، ويشمل البرنامج رقمنة الخدمات الإدارية وتوسيع الولوج إلى الإنترنت عالي الصبيب في المناطق القروية.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b092",
+    "msa_query": "ما هي مدة صلاحية بطاقات الأنترنت المسبقة الأداء؟",
+    "darija_query": "شحال كتدوم صلاحية الكارطة ديال الأنترنت؟",
+    "gold_answer": "تختلف مدة الصلاحية حسب العرض وحجم الرصيد المشترى.",
+    "source_chunk_id": "chunk_029",
+    "source_chunk_text": "تقدم شركات الاتصالات الثلاث الكبرى في المغرب، اتصالات المغرب وأورونج وإنوي، عروضاً متنوعة لبطاقات الأنترنت المسبقة الأداء، تتراوح أثمنتها حسب حجم الرصيد ومدة الصلاحية، وتشهد المنافسة بينها عروضاً ترويجية متكررة.",
+    "flags": [
+      "GROUNDING: NO — LLM judge says answer not fully supported by source_chunk_text; verify carefully"
+    ]
+  },
+  {
+    "id": "b094",
+    "msa_query": "أين يتم توقيع عقد الكراء عادة؟",
+    "darija_query": "فين كيتوقع عقد الكراء؟",
+    "gold_answer": "يوقَّع عقد الكراء بين المكري والمكتري لتحديد شروط السكن.",
+    "source_chunk_id": "chunk_035",
+    "source_chunk_text": "عند كراء شقة سكنية في المغرب، يطلب المكري عادة إيداع وجيبة تعادل شهراً أو شهرين من الكراء كضمانة، بالإضافة إلى توقيع عقد كراء يحدد مدة العقد وثمن الكراء الشهري وشروط الإخلاء.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b096",
+    "msa_query": "ما نوع الخدمة البنكية الأساسية التي يوفرها بنك البريد؟",
+    "darija_query": "شنو هي الخدمة البنكية الأساسية لي كيوفرها بنك البريد؟",
+    "gold_answer": "يوفر خدمات الادخار والحسابات البنكية الأساسية.",
+    "source_chunk_id": "chunk_039",
+    "source_chunk_text": "يوفر بريد المغرب عبر بنك البريد خدمات التحويل المالي الداخلي والدولي، ويستعملها كثير من المغاربة المقيمين بالخارج لإرسال الأموال لعائلاتهم، إلى جانب خدمات الادخار والحسابات البنكية الأساسية.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b097",
+    "msa_query": "هل ترتفع أثمنة الأغنام في كل السنة أم في فترة محددة؟",
+    "darija_query": "واش ثمن الغنم كيغلى فالعام كامل ولا فوقت معين؟",
+    "gold_answer": "ترتفع بشكل خاص في الأسابيع التي تسبق عيد الأضحى.",
+    "source_chunk_id": "chunk_037",
+    "source_chunk_text": "يشهد سوق الأضاحي إقبالاً كبيراً في الأسابيع التي تسبق عيد الأضحى، حيث ترتفع أثمنة الأغنام بشكل ملحوظ، وتحدد وزارة الفلاحة كل سنة توصيات لتنظيم أسواق بيع المواشي وضمان جودتها.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b098",
+    "msa_query": "هل يشتري المغاربة الخبز يومياً من المخبزة؟",
+    "darija_query": "واش المغاربة كيشريو الخبز كل نهار من الفرن؟",
+    "gold_answer": "نعم، يخضع ثمن الخبز التقليدي للمخابز لرقابة نسبية لضمان توفره اليومي بثمن معقول.",
+    "source_chunk_id": "chunk_030",
+    "source_chunk_text": "يخضع ثمن الخبز التقليدي في المخابز لرقابة نسبية من طرف السلطات المحلية للحفاظ على ثمن معقول يتناسب مع القدرة الشرائية للمواطنين، ويتراوح ثمن الخبز العادي بين 1.2 و1.5 درهم للقطعة في أغلب المناطق.",
+    "flags": [
+      "GROUNDING: NO — LLM judge says answer not fully supported by source_chunk_text; verify carefully"
+    ]
+  },
+  {
+    "id": "b099",
+    "msa_query": "أين تُباع الخضر والفواكه الطازجة عادة في الأحياء الشعبية؟",
+    "darija_query": "فين كيتباعو الخضرة والفواكه الطرية فالحومة؟",
+    "gold_answer": "تُباع عادة في السوق الأسبوعي أو في الحانوت الصغير القريب من المنزل.",
+    "source_chunk_id": "chunk_026",
+    "source_chunk_text": "تُقام الأسواق الأسبوعية (السوق) في أغلب المدن والقرى المغربية في يوم محدد من الأسبوع، حيث يعرض الفلاحون والباعة منتجاتهم من خضر وفواكه ومواشي مباشرة للمستهلكين، وتبقى المساومة على الأثمنة عادة شائعة هناك.",
+    "flags": [
+      "GROUNDING: NO — LLM judge says answer not fully supported by source_chunk_text; verify carefully"
+    ]
+  },
+  {
+    "id": "b100",
+    "msa_query": "هل يفضل معظم الركاب الطاكسي الصغير أم الطرامواي داخل المدينة؟",
+    "darija_query": "واش أغلب الناس كيفضلو الطاكسي الصغير ولا الطرامواي فالمدينة؟",
+    "gold_answer": "يختلف حسب المسافة والثمن، فالطرامواي أرخص عادة على المسافات الطويلة داخل المدينة.",
+    "source_chunk_id": "chunk_028",
+    "source_chunk_text": "يشتغل الطرامواي في الدار البيضاء والرباط يومياً من الساعة السادسة صباحاً إلى منتصف الليل تقريباً، وتتراوح تذكرة الرحلة الواحدة حوالي 7 دراهم، مع وجود اشتراكات شهرية بثمن مخفض للمستعملين المنتظمين.",
+    "flags": [
+      "GROUNDING: NO — LLM judge says answer not fully supported by source_chunk_text; verify carefully"
+    ]
+  },
+  {
+    "id": "b101",
+    "msa_query": "عن ماذا يمتنع الصائمون خلال رمضان؟",
+    "darija_query": "أش كيتحاشاو الصايمين فرمضان؟",
+    "gold_answer": "يمتنعون عن الأكل والشرب من أذان الفجر إلى أذان المغرب.",
+    "source_chunk_id": "chunk_041",
+    "source_chunk_text": "يمتنع الصائمون خلال شهر رمضان عن الأكل والشرب من أذان الفجر إلى أذان المغرب، وتجتمع العائلات المغربية عادة على مائدة الإفطار حول أطباق تقليدية مثل الحريرة والشباكية والتمر، قبل التوجه لاحقاً لصلاة التراويح.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b102",
+    "msa_query": "ما هي الأطباق التقليدية على مائدة الإفطار؟",
+    "darija_query": "شنو هوما الأكلات التقليدية ديال الفطور؟",
+    "gold_answer": "الحريرة والشباكية والتمر من أبرز الأطباق التقليدية.",
+    "source_chunk_id": "chunk_041",
+    "source_chunk_text": "يمتنع الصائمون خلال شهر رمضان عن الأكل والشرب من أذان الفجر إلى أذان المغرب، وتجتمع العائلات المغربية عادة على مائدة الإفطار حول أطباق تقليدية مثل الحريرة والشباكية والتمر، قبل التوجه لاحقاً لصلاة التراويح.",
+    "flags": [
+      "GROUNDING: NO — LLM judge says answer not fully supported by source_chunk_text; verify carefully"
+    ]
+  },
+  {
+    "id": "b103",
+    "msa_query": "ماذا يفعل المصلون بعد الإفطار؟",
+    "darija_query": "أش كيديرو الناس من بعد الفطور؟",
+    "gold_answer": "يتوجهون لاحقاً لصلاة التراويح.",
+    "source_chunk_id": "chunk_041",
+    "source_chunk_text": "يمتنع الصائمون خلال شهر رمضان عن الأكل والشرب من أذان الفجر إلى أذان المغرب، وتجتمع العائلات المغربية عادة على مائدة الإفطار حول أطباق تقليدية مثل الحريرة والشباكية والتمر، قبل التوجه لاحقاً لصلاة التراويح.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b104",
+    "msa_query": "متى يبدأ الامتناع عن الأكل في رمضان؟",
+    "darija_query": "إمتى كيبدا الصيام فرمضان؟",
+    "gold_answer": "يبدأ من أذان الفجر.",
+    "source_chunk_id": "chunk_041",
+    "source_chunk_text": "يمتنع الصائمون خلال شهر رمضان عن الأكل والشرب من أذان الفجر إلى أذان المغرب، وتجتمع العائلات المغربية عادة على مائدة الإفطار حول أطباق تقليدية مثل الحريرة والشباكية والتمر، قبل التوجه لاحقاً لصلاة التراويح.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b107",
+    "msa_query": "ماذا يضم جهاز العروس عادة؟",
+    "darija_query": "أش كيضم الجهاز ديال العروسة؟",
+    "gold_answer": "يضم الأثاث والملابس التقليدية.",
+    "source_chunk_id": "chunk_042",
+    "source_chunk_text": "يتضمن العرس المغربي التقليدي عدة مراسيم تمتد أحياناً على أكثر من يوم، من أبرزها ليلة الحناء التي تُزين فيها العروس بالحناء، إضافة إلى تحضير جهاز العروس الذي يضم الأثاث والملابس التقليدية.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b114",
+    "msa_query": "ما هو الامتحان الذي يسبق الامتحان التطبيقي للسياقة؟",
+    "darija_query": "شنو هو الامتحان لي كيسبق الامتحان التطبيقي؟",
+    "gold_answer": "مباراة الكود النظرية.",
+    "source_chunk_id": "chunk_043",
+    "source_chunk_text": "للحصول على رخصة السياقة بالمغرب، يجب اجتياز مباراة الكود النظرية ثم الامتحان التطبيقي داخل مدرسة تعليم السياقة (أوطو إيكول)، وتختلف مدة التكوين حسب الصنف المطلوب من الرخصة.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b116",
+    "msa_query": "كل كم سنة يجب تجديد البطاقة الوطنية للتعريف؟",
+    "darija_query": "شحال ديال السنين خاصك تجدد السيني؟",
+    "gold_answer": "يجب تجديدها كل عشر سنوات.",
+    "source_chunk_id": "chunk_044",
+    "source_chunk_text": "تُعتبر البطاقة الوطنية للتعريف الإلكترونية (السيني) وثيقة إلزامية لكل مواطن مغربي بالغ سن الثامنة عشرة، ويجب تجديدها كل عشر سنوات عبر مصالح الأمن الوطني أو السلطة المحلية.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b117",
+    "msa_query": "من يجب عليه امتلاك بطاقة التعريف الوطنية؟",
+    "darija_query": "شكون خاصو يكون عندو السيني؟",
+    "gold_answer": "كل مواطن مغربي بالغ سن الثامنة عشرة.",
+    "source_chunk_id": "chunk_044",
+    "source_chunk_text": "تُعتبر البطاقة الوطنية للتعريف الإلكترونية (السيني) وثيقة إلزامية لكل مواطن مغربي بالغ سن الثامنة عشرة، ويجب تجديدها كل عشر سنوات عبر مصالح الأمن الوطني أو السلطة المحلية.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b118",
+    "msa_query": "أين يتم تجديد البطاقة الوطنية للتعريف؟",
+    "darija_query": "فين كتجدد السيني؟",
+    "gold_answer": "عبر مصالح الأمن الوطني أو السلطة المحلية.",
+    "source_chunk_id": "chunk_044",
+    "source_chunk_text": "تُعتبر البطاقة الوطنية للتعريف الإلكترونية (السيني) وثيقة إلزامية لكل مواطن مغربي بالغ سن الثامنة عشرة، ويجب تجديدها كل عشر سنوات عبر مصالح الأمن الوطني أو السلطة المحلية.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b119",
+    "msa_query": "هل البطاقة الوطنية للتعريف إلزامية؟",
+    "darija_query": "واش السيني إجبارية؟",
+    "gold_answer": "نعم، تُعتبر وثيقة إلزامية لكل مواطن بالغ.",
+    "source_chunk_id": "chunk_044",
+    "source_chunk_text": "تُعتبر البطاقة الوطنية للتعريف الإلكترونية (السيني) وثيقة إلزامية لكل مواطن مغربي بالغ سن الثامنة عشرة، ويجب تجديدها كل عشر سنوات عبر مصالح الأمن الوطني أو السلطة المحلية.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b121",
+    "msa_query": "ماذا يتضمن ملف طلب جواز السفر؟",
+    "darija_query": "أش كيضم ملف طلب الباسبور؟",
+    "gold_answer": "يتضمن البطاقة الوطنية وشهادة السكنى وصوراً شمسية حديثة.",
+    "source_chunk_id": "chunk_045",
+    "source_chunk_text": "يتقدم طالب جواز السفر المغربي بملف يتضمن البطاقة الوطنية وشهادة السكنى وصوراً شمسية حديثة إلى مصلحة الجوازات، وتستغرق عملية الاستخراج عادة بضعة أسابيع حسب الجهة.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b122",
+    "msa_query": "كم من الوقت تستغرق عملية استخراج جواز السفر؟",
+    "darija_query": "شحال ديال الوقت كتاخد عملية استخراج الباسبور؟",
+    "gold_answer": "تستغرق عادة بضعة أسابيع حسب الجهة.",
+    "source_chunk_id": "chunk_045",
+    "source_chunk_text": "يتقدم طالب جواز السفر المغربي بملف يتضمن البطاقة الوطنية وشهادة السكنى وصوراً شمسية حديثة إلى مصلحة الجوازات، وتستغرق عملية الاستخراج عادة بضعة أسابيع حسب الجهة.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b123",
+    "msa_query": "إلى أي مصلحة يتقدم طالب جواز السفر؟",
+    "darija_query": "فين كيمشي طالب الباسبور باش يقدم الملف؟",
+    "gold_answer": "يتقدم إلى مصلحة الجوازات.",
+    "source_chunk_id": "chunk_045",
+    "source_chunk_text": "يتقدم طالب جواز السفر المغربي بملف يتضمن البطاقة الوطنية وشهادة السكنى وصوراً شمسية حديثة إلى مصلحة الجوازات، وتستغرق عملية الاستخراج عادة بضعة أسابيع حسب الجهة.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b124",
+    "msa_query": "هل تختلف مدة استخراج جواز السفر باختلاف الجهة؟",
+    "darija_query": "واش المدة ديال الباسبور كتختلف من جهة لجهة؟",
+    "gold_answer": "نعم، تستغرق العملية بضعة أسابيع حسب الجهة.",
+    "source_chunk_id": "chunk_045",
+    "source_chunk_text": "يتقدم طالب جواز السفر المغربي بملف يتضمن البطاقة الوطنية وشهادة السكنى وصوراً شمسية حديثة إلى مصلحة الجوازات، وتستغرق عملية الاستخراج عادة بضعة أسابيع حسب الجهة.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b125",
+    "msa_query": "ما نوع الصور المطلوبة في ملف جواز السفر؟",
+    "darija_query": "أش نوع التصاور لي مطلوبة فملف الباسبور؟",
+    "gold_answer": "صور شمسية حديثة.",
+    "source_chunk_id": "chunk_045",
+    "source_chunk_text": "يتقدم طالب جواز السفر المغربي بملف يتضمن البطاقة الوطنية وشهادة السكنى وصوراً شمسية حديثة إلى مصلحة الجوازات، وتستغرق عملية الاستخراج عادة بضعة أسابيع حسب الجهة.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b127",
+    "msa_query": "ماذا يحدد نجاح التلميذ في الباكالوريا؟",
+    "darija_query": "أش كيحدد النجاح فالباكالوريا؟",
+    "gold_answer": "يحدد إمكانية الولوج للتعليم العالي.",
+    "source_chunk_id": "chunk_046",
+    "source_chunk_text": "يجتاز تلاميذ الثانية باكالوريا في المغرب امتحاناً وطنياً موحداً يُعرف بالباكالوريا، يحدد نجاحهم فيه إمكانية الولوج للتعليم العالي، وتشمل المواد الأساسية الرياضيات والفيزياء واللغات حسب الشعبة المختارة.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b134",
+    "msa_query": "لمن تُستعمل شبكات التواصل في الترويج التجاري؟",
+    "darija_query": "لمن كتستعمل الشبكات الاجتماعية فالترويج التجاري؟",
+    "gold_answer": "تُستعمل لدى الشباب بشكل خاص للترويج التجاري.",
+    "source_chunk_id": "chunk_047",
+    "source_chunk_text": "شهد استعمال شبكات التواصل الاجتماعي في المغرب، خصوصاً فيسبوك وإنستغرام وتيك توك، نمواً كبيراً في السنوات الأخيرة، حيث أصبحت هذه المنصات وسيلة أساسية للتواصل والترويج التجاري لدى الشباب.",
+    "flags": [
+      "GROUNDING: NO — LLM judge says answer not fully supported by source_chunk_text; verify carefully",
+      "DIALECT: 0 recognized Darija markers — may be lightly-edited MSA, not real dialect"
+    ]
+  },
+  {
+    "id": "b135",
+    "msa_query": "ما هي إحدى المنصات التي شهدت نمواً كبيراً بالمغرب؟",
+    "darija_query": "شنو هي وحدة من المنصات لي زادات بزاف فالمغرب؟",
+    "gold_answer": "تيك توك من المنصات التي شهدت نمواً كبيراً.",
+    "source_chunk_id": "chunk_047",
+    "source_chunk_text": "شهد استعمال شبكات التواصل الاجتماعي في المغرب، خصوصاً فيسبوك وإنستغرام وتيك توك، نمواً كبيراً في السنوات الأخيرة، حيث أصبحت هذه المنصات وسيلة أساسية للتواصل والترويج التجاري لدى الشباب.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b136",
+    "msa_query": "من ماذا تعاني المدن الكبرى بالمغرب في ساعات الذروة؟",
+    "darija_query": "أش كتعاني منو المدن الكبار فساعات الذروة؟",
+    "gold_answer": "تعاني من ازدحام مروري خانق.",
+    "source_chunk_id": "chunk_048",
+    "source_chunk_text": "تعاني المدن الكبرى بالمغرب، وخصوصاً الدار البيضاء، من ازدحام مروري خانق في ساعات الذروة، إضافة إلى نقص أماكن التوقف المنظمة، ما دفع بعض المجالس المحلية إلى إحداث مواقف مؤدى عنها لتنظيم الوضعية.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b137",
+    "msa_query": "ما الذي دفع بعض المجالس المحلية لإحداث مواقف مؤدى عنها؟",
+    "darija_query": "أش لي دفع بعض المجالس المحلية يحدثو مواقف مؤدى عليها؟",
+    "gold_answer": "نقص أماكن التوقف المنظمة.",
+    "source_chunk_id": "chunk_048",
+    "source_chunk_text": "تعاني المدن الكبرى بالمغرب، وخصوصاً الدار البيضاء، من ازدحام مروري خانق في ساعات الذروة، إضافة إلى نقص أماكن التوقف المنظمة، ما دفع بعض المجالس المحلية إلى إحداث مواقف مؤدى عنها لتنظيم الوضعية.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b138",
+    "msa_query": "أي مدينة مغربية تعاني بشكل خاص من الازدحام المروري؟",
+    "darija_query": "شنو المدينة لي كتعاني بزاف من الزحمة؟",
+    "gold_answer": "الدار البيضاء تعاني بشكل خاص من ازدحام مروري.",
+    "source_chunk_id": "chunk_048",
+    "source_chunk_text": "تعاني المدن الكبرى بالمغرب، وخصوصاً الدار البيضاء، من ازدحام مروري خانق في ساعات الذروة، إضافة إلى نقص أماكن التوقف المنظمة، ما دفع بعض المجالس المحلية إلى إحداث مواقف مؤدى عنها لتنظيم الوضعية.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b140",
+    "msa_query": "متى يكون الازدحام المروري في أشده؟",
+    "darija_query": "إمتى كتكون الزحمة فأوجها؟",
+    "gold_answer": "في ساعات الذروة.",
+    "source_chunk_id": "chunk_048",
+    "source_chunk_text": "تعاني المدن الكبرى بالمغرب، وخصوصاً الدار البيضاء، من ازدحام مروري خانق في ساعات الذروة، إضافة إلى نقص أماكن التوقف المنظمة، ما دفع بعض المجالس المحلية إلى إحداث مواقف مؤدى عنها لتنظيم الوضعية.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b142",
+    "msa_query": "ماذا تشجع حملات وزارة البيئة؟",
+    "darija_query": "أش كتشجع الحملات ديال وزارة البيئة؟",
+    "gold_answer": "تشجع استعمال وسائل النقل الجماعي والدراجات.",
+    "source_chunk_id": "chunk_049",
+    "source_chunk_text": "أطلقت وزارة البيئة حملات توعوية للحد من تلوث الهواء في المدن الكبرى، من خلال تشجيع استعمال وسائل النقل الجماعي والدراجات، ومراقبة انبعاثات المصانع والمركبات القديمة.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b148",
+    "msa_query": "ماذا تبث القنوات المغربية بكثرة في رمضان؟",
+    "darija_query": "أش كتبات القنوات المغربية بزاف فرمضان؟",
+    "gold_answer": "تبث المسلسلات والبرامج الرمضانية الخاصة.",
+    "source_chunk_id": "chunk_050",
+    "source_chunk_text": "تعرف القنوات التلفزية المغربية إقبالاً كبيراً خلال شهر رمضان بفضل بث المسلسلات والبرامج الرمضانية الخاصة، حيث تتنافس القنوات الوطنية على جذب أكبر عدد من المشاهدين بأعمال درامية جديدة كل سنة.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b150",
+    "msa_query": "ما هو السبب الرئيسي لإقبال المشاهدين خلال رمضان؟",
+    "darija_query": "شنو السبب الرئيسي لإقبال المشاهدين فرمضان؟",
+    "gold_answer": "بث المسلسلات والبرامج الرمضانية الخاصة.",
+    "source_chunk_id": "chunk_050",
+    "source_chunk_text": "تعرف القنوات التلفزية المغربية إقبالاً كبيراً خلال شهر رمضان بفضل بث المسلسلات والبرامج الرمضانية الخاصة، حيث تتنافس القنوات الوطنية على جذب أكبر عدد من المشاهدين بأعمال درامية جديدة كل سنة.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b156",
+    "msa_query": "ماذا توفر البنوك المغربية لتشجيع اقتناء السكن؟",
+    "darija_query": "أش كتوفر البنوك باش تشجع الناس يشريو دار؟",
+    "gold_answer": "توفر قروضاً سكنية بأسعار فائدة تفاضلية.",
+    "source_chunk_id": "chunk_052",
+    "source_chunk_text": "توفر البنوك المغربية قروضاً سكنية بأسعار فائدة تفاضلية لتشجيع اقتناء السكن، خصوصاً في إطار برامج دعم السكن الاجتماعي، وتتطلب هذه القروض عادة تقديم ملف يثبت الدخل الشهري والضمانات المطلوبة.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b158",
+    "msa_query": "في إطار أي برامج تُمنح القروض السكنية التفاضلية؟",
+    "darija_query": "فأي برامج كتعطى القروض السكنية التفاضلية؟",
+    "gold_answer": "في إطار برامج دعم السكن الاجتماعي.",
+    "source_chunk_id": "chunk_052",
+    "source_chunk_text": "توفر البنوك المغربية قروضاً سكنية بأسعار فائدة تفاضلية لتشجيع اقتناء السكن، خصوصاً في إطار برامج دعم السكن الاجتماعي، وتتطلب هذه القروض عادة تقديم ملف يثبت الدخل الشهري والضمانات المطلوبة.",
+    "flags": [
+      "DIALECT: 0 recognized Darija markers — may be lightly-edited MSA, not real dialect"
+    ]
+  },
+  {
+    "id": "b160",
+    "msa_query": "ما الذي يثبته ملف طلب القرض السكني؟",
+    "darija_query": "أش لي كيثبتو ملف طلب القرض السكني؟",
+    "gold_answer": "يثبت الدخل الشهري والضمانات المطلوبة.",
+    "source_chunk_id": "chunk_052",
+    "source_chunk_text": "توفر البنوك المغربية قروضاً سكنية بأسعار فائدة تفاضلية لتشجيع اقتناء السكن، خصوصاً في إطار برامج دعم السكن الاجتماعي، وتتطلب هذه القروض عادة تقديم ملف يثبت الدخل الشهري والضمانات المطلوبة.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b161",
+    "msa_query": "ماذا يجب فعله عند شراء سيارة بالمغرب؟",
+    "darija_query": "أش خاصك تدير منين تشري طوموبيل؟",
+    "gold_answer": "يجب تسجيلها باسم المالك الجديد عبر مصلحة البطاقة الرمادية.",
+    "source_chunk_id": "chunk_053",
+    "source_chunk_text": "عند شراء سيارة بالمغرب، يجب تسجيلها باسم المالك الجديد عبر مصلحة البطاقة الرمادية، وهي الوثيقة الرسمية التي تثبت ملكية السيارة وتحمل معلومات صاحبها ومواصفات المركبة.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b162",
+    "msa_query": "ما هي الوثيقة التي تثبت ملكية السيارة؟",
+    "darija_query": "شنو هي الوثيقة لي كتثبت الملكية ديال الطوموبيل؟",
+    "gold_answer": "البطاقة الرمادية.",
+    "source_chunk_id": "chunk_053",
+    "source_chunk_text": "عند شراء سيارة بالمغرب، يجب تسجيلها باسم المالك الجديد عبر مصلحة البطاقة الرمادية، وهي الوثيقة الرسمية التي تثبت ملكية السيارة وتحمل معلومات صاحبها ومواصفات المركبة.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b164",
+    "msa_query": "عبر أي مصلحة تُسجل السيارة باسم المالك الجديد؟",
+    "darija_query": "من أي مصلحة كتسجل الطوموبيل بسمية المالك الجديد؟",
+    "gold_answer": "عبر مصلحة البطاقة الرمادية.",
+    "source_chunk_id": "chunk_053",
+    "source_chunk_text": "عند شراء سيارة بالمغرب، يجب تسجيلها باسم المالك الجديد عبر مصلحة البطاقة الرمادية، وهي الوثيقة الرسمية التي تثبت ملكية السيارة وتحمل معلومات صاحبها ومواصفات المركبة.",
+    "flags": [
+      "DIALECT: 0 recognized Darija markers — may be lightly-edited MSA, not real dialect"
+    ]
+  },
+  {
+    "id": "b165",
+    "msa_query": "هل البطاقة الرمادية وثيقة رسمية؟",
+    "darija_query": "واش البطاقة الرمادية وثيقة رسمية؟",
+    "gold_answer": "نعم، هي الوثيقة الرسمية التي تثبت ملكية السيارة.",
+    "source_chunk_id": "chunk_053",
+    "source_chunk_text": "عند شراء سيارة بالمغرب، يجب تسجيلها باسم المالك الجديد عبر مصلحة البطاقة الرمادية، وهي الوثيقة الرسمية التي تثبت ملكية السيارة وتحمل معلومات صاحبها ومواصفات المركبة.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b169",
+    "msa_query": "ما هو الاسم الكامل لأنابيك؟",
+    "darija_query": "شنو هو الاسم الكامل ديال أنابيك؟",
+    "gold_answer": "الوكالة الوطنية لإنعاش التشغيل والكفاءات.",
+    "source_chunk_id": "chunk_054",
+    "source_chunk_text": "تساعد الوكالة الوطنية لإنعاش التشغيل والكفاءات (أنابيك) الباحثين عن الشغل من خلال عروض التوظيف والتكوينات المهنية، وتنظم بشكل دوري منتديات وملتقيات للتشغيل تجمع الباحثين عن العمل بالمشغلين.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b170",
+    "msa_query": "لمن تساعد أنابيك بشكل أساسي؟",
+    "darija_query": "لمن كتعاون أنابيك بشكل أساسي؟",
+    "gold_answer": "تساعد الباحثين عن الشغل.",
+    "source_chunk_id": "chunk_054",
+    "source_chunk_text": "تساعد الوكالة الوطنية لإنعاش التشغيل والكفاءات (أنابيك) الباحثين عن الشغل من خلال عروض التوظيف والتكوينات المهنية، وتنظم بشكل دوري منتديات وملتقيات للتشغيل تجمع الباحثين عن العمل بالمشغلين.",
+    "flags": [
+      "DIALECT: 0 recognized Darija markers — may be lightly-edited MSA, not real dialect"
+    ]
+  },
+  {
+    "id": "b177",
+    "msa_query": "ماذا يفعل الأطفال في الحدائق العمومية؟",
+    "darija_query": "أش كيديرو الدراري فالحديقة؟",
+    "gold_answer": "يقضون أوقاتاً في اللعب.",
+    "source_chunk_id": "chunk_056",
+    "source_chunk_text": "تشكل الحدائق العمومية وجهة مفضلة للعائلات المغربية خلال عطلة نهاية الأسبوع، حيث يقضي الأطفال أوقاتاً في اللعب بينما يجلس الكبار للراحة أو تناول وجبة خفيفة في الهواء الطلق.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b178",
+    "msa_query": "ماذا يفعل الكبار في الحدائق العمومية؟",
+    "darija_query": "أش كيديرو الكبار فالحديقة؟",
+    "gold_answer": "يجلسون للراحة أو تناول وجبة خفيفة في الهواء الطلق.",
+    "source_chunk_id": "chunk_056",
+    "source_chunk_text": "تشكل الحدائق العمومية وجهة مفضلة للعائلات المغربية خلال عطلة نهاية الأسبوع، حيث يقضي الأطفال أوقاتاً في اللعب بينما يجلس الكبار للراحة أو تناول وجبة خفيفة في الهواء الطلق.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b181",
+    "msa_query": "ما هي المدن التي تستقطب السياح الداخليين المغاربة؟",
+    "darija_query": "شنو هوما المدن لي كتجبد السياح المغاربة؟",
+    "gold_answer": "شفشاون والصويرة وإفران من أبرزها.",
+    "source_chunk_id": "chunk_057",
+    "source_chunk_text": "تستقطب مدن مثل شفشاون والصويرة وإفران عدداً متزايداً من السياح الداخليين المغاربة، بفضل طبيعتها المميزة وأجوائها الهادئة البعيدة عن ازدحام المدن الكبرى.",
+    "flags": [
+      "GROUNDING: NO — LLM judge says answer not fully supported by source_chunk_text; verify carefully"
+    ]
+  },
+  {
+    "id": "b184",
+    "msa_query": "ما هي مدينة إفران من حيث الطبيعة؟",
+    "darija_query": "شنو خاصية إفران من حيث الطبيعة؟",
+    "gold_answer": "تتميز بطبيعتها المميزة وأجوائها الهادئة.",
+    "source_chunk_id": "chunk_057",
+    "source_chunk_text": "تستقطب مدن مثل شفشاون والصويرة وإفران عدداً متزايداً من السياح الداخليين المغاربة، بفضل طبيعتها المميزة وأجوائها الهادئة البعيدة عن ازدحام المدن الكبرى.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b187",
+    "msa_query": "كيف تكون درجات الحرارة صيفاً في المناطق الداخلية؟",
+    "darija_query": "كيفاش كتكون درجة الحرارة فالصيف فالمناطق الداخلية؟",
+    "gold_answer": "تكون مرتفعة جداً صيفاً.",
+    "source_chunk_id": "chunk_058",
+    "source_chunk_text": "يشهد المغرب تبايناً كبيراً في المناخ حسب الفصول والمناطق، حيث تتساقط الثلوج شتاءً على قمم جبال الأطلس، بينما تكون درجات الحرارة صيفاً مرتفعة جداً في المناطق الداخلية والجنوبية.",
+    "flags": [
+      "GROUNDING: NO — LLM judge says answer not fully supported by source_chunk_text; verify carefully"
+    ]
+  },
+  {
+    "id": "b189",
+    "msa_query": "في أي فصل تتساقط الثلوج على جبال الأطلس؟",
+    "darija_query": "فأي فصل كتساقط الثلج على الأطلس؟",
+    "gold_answer": "تتساقط شتاءً.",
+    "source_chunk_id": "chunk_058",
+    "source_chunk_text": "يشهد المغرب تبايناً كبيراً في المناخ حسب الفصول والمناطق، حيث تتساقط الثلوج شتاءً على قمم جبال الأطلس، بينما تكون درجات الحرارة صيفاً مرتفعة جداً في المناطق الداخلية والجنوبية.",
+    "flags": [
+      "DIALECT: 0 recognized Darija markers — may be lightly-edited MSA, not real dialect"
+    ]
+  },
+  {
+    "id": "b190",
+    "msa_query": "أين تكون درجات الحرارة مرتفعة جداً صيفاً؟",
+    "darija_query": "فين كتكون الحرارة عالية بزاف فالصيف؟",
+    "gold_answer": "في المناطق الداخلية والجنوبية.",
+    "source_chunk_id": "chunk_058",
+    "source_chunk_text": "يشهد المغرب تبايناً كبيراً في المناخ حسب الفصول والمناطق، حيث تتساقط الثلوج شتاءً على قمم جبال الأطلس، بينما تكون درجات الحرارة صيفاً مرتفعة جداً في المناطق الداخلية والجنوبية.",
+    "flags": [
+      "GROUNDING: NO — LLM judge says answer not fully supported by source_chunk_text; verify carefully"
+    ]
+  },
+  {
+    "id": "b193",
+    "msa_query": "ماذا يحرص كثير من العائلات على فعله يوم الجمعة؟",
+    "darija_query": "أش كتحرص عليه بزاف من العائلات نهار الجمعة؟",
+    "gold_answer": "التجمع حول مائدة الكسكس.",
+    "source_chunk_id": "chunk_059",
+    "source_chunk_text": "يحرص كثير من العائلات المغربية على التجمع أيام الجمعة أو المناسبات الخاصة حول مائدة الكسكس، حيث تلعب الجدة أو الأم الكبيرة دوراً محورياً في الحفاظ على تقاليد الطبخ العائلي.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b194",
+    "msa_query": "ما هو دور الجدة في العائلة المغربية عادة؟",
+    "darija_query": "شنو هو الدور ديال الجدة فالعائلة؟",
+    "gold_answer": "تلعب دوراً محورياً في الحفاظ على تقاليد الطبخ العائلي.",
+    "source_chunk_id": "chunk_059",
+    "source_chunk_text": "يحرص كثير من العائلات المغربية على التجمع أيام الجمعة أو المناسبات الخاصة حول مائدة الكسكس، حيث تلعب الجدة أو الأم الكبيرة دوراً محورياً في الحفاظ على تقاليد الطبخ العائلي.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b198",
+    "msa_query": "من يتوجه جماعياً للمسجد يوم الجمعة؟",
+    "darija_query": "شكون لي كيمشي جماعي للجامع نهار الجمعة؟",
+    "gold_answer": "الرجال يتوجهون جماعياً للمسجد.",
+    "source_chunk_id": "chunk_060",
+    "source_chunk_text": "تُقام صلاة الجمعة في المساجد المغربية ظهراً وتتضمن خطبة دينية قبل الصلاة، وتُعتبر من أهم المناسبات الأسبوعية التي يحرص عليها المصلون، خصوصاً الرجال الذين يتوجهون جماعياً للمسجد.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  },
+  {
+    "id": "b200",
+    "msa_query": "ماذا يسبق صلاة الجمعة في المساجد؟",
+    "darija_query": "أش كيسبق صلاة الجمعة فالمساجد؟",
+    "gold_answer": "تسبقها خطبة دينية.",
+    "source_chunk_id": "chunk_060",
+    "source_chunk_text": "تُقام صلاة الجمعة في المساجد المغربية ظهراً وتتضمن خطبة دينية قبل الصلاة، وتُعتبر من أهم المناسبات الأسبوعية التي يحرص عليها المصلون، خصوصاً الرجال الذين يتوجهون جماعياً للمسجد.",
+    "flags": [
+      "ALIGNMENT: flagged by MSA/Darija similarity check (TOO_SIMILAR or LOW_ALIGNMENT) — check exact score in your notebook's Cell 13 output for this id"
+    ]
+  }
+]
