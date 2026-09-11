@@ -76,7 +76,7 @@ See `LICENSE`. (Default suggestion: CC-BY-4.0 — update once finalized.)
 ## Citation
 
 If you use this dataset, please cite the associated paper (details to be
-added once published at IEEE-ICCA 2026).
+added once published ).
 
 # MSA
 
