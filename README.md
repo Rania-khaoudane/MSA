@@ -1,3 +1,4 @@
+
 # MSA–Darija Parallel QA Benchmark
 
 A parallel Modern Standard Arabic (MSA) / Moroccan Darija question-answering
@@ -76,3 +77,6 @@ See `LICENSE`. (Default suggestion: CC-BY-4.0 — update once finalized.)
 
 If you use this dataset, please cite the associated paper (details to be
 added once published at IEEE-ICCA 2026).
+
+# MSA
+
