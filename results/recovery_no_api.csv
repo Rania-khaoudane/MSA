@@ -1,0 +1,9 @@
+encoder,alpha,mitigation,baseline,mismatch,mitigated,recovery_%
+DarijaBERT,0.8,M3_rule_expansion,0.947,0.887,0.903,27.8
+multilingual-e5-base,0.8,M4_rulebased,0.98,0.86,0.88,16.7
+DarijaBERT,0.8,M4_rulebased,0.947,0.887,0.887,0.0
+multilingual-e5-base,0.8,M3_rule_expansion,0.98,0.86,0.86,0.0
+paraphrase-multilingual-MiniLM-L12-v2,0.2,M4_rulebased,0.917,0.767,0.76,-4.4
+paraphrase-multilingual-MiniLM-L12-v2,0.2,M3_rule_expansion,0.917,0.767,0.76,-4.4
+paraphrase-multilingual-mpnet-base-v2,0.4,M3_rule_expansion,0.923,0.807,0.8,-5.7
+paraphrase-multilingual-mpnet-base-v2,0.4,M4_rulebased,0.923,0.807,0.797,-8.6

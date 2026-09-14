@@ -1,0 +1,17 @@
+encoder,subset,mitigation,improvement,lo,hi,recovery_%,significant
+GATE-AraBert-v1,wikipedia,M4_rulebased,-0.005,-0.025,0.01,-9.090909090909083,no
+GATE-AraBert-v1,wikipedia,M3_rule_expansion,-0.005,-0.020124999999999994,0.01,-9.090909090909083,no
+GATE-AraBert-v1,pilot,M4_rulebased,-0.023333333333333334,-0.043333333333333335,-0.0033333333333333335,-26.923076923076923,no
+GATE-AraBert-v1,pilot,M3_rule_expansion,0.0033333333333333335,-0.006666666666666667,0.013333333333333334,3.8461538461538463,no
+Arabic-Triplet-Matryoshka-V2,wikipedia,M4_rulebased,0.0,-0.015,0.015,0.0,no
+Arabic-Triplet-Matryoshka-V2,wikipedia,M3_rule_expansion,0.0,0.0,0.0,0.0,no
+Arabic-Triplet-Matryoshka-V2,pilot,M4_rulebased,-0.016666666666666666,-0.03333333333333333,-0.0033333333333333335,-21.73913043478261,no
+Arabic-Triplet-Matryoshka-V2,pilot,M3_rule_expansion,0.0,-0.01,0.01,0.0,no
+Arabert-all-nli-triplet-Matryoshka,wikipedia,M4_rulebased,-0.005,-0.03,0.015,-5.555555555555557,no
+Arabert-all-nli-triplet-Matryoshka,wikipedia,M3_rule_expansion,0.01,-0.01,0.03,11.111111111111114,no
+Arabert-all-nli-triplet-Matryoshka,pilot,M4_rulebased,-0.01,-0.02666666666666667,0.0033333333333333335,-17.647058823529385,no
+Arabert-all-nli-triplet-Matryoshka,pilot,M3_rule_expansion,-0.016666666666666666,-0.03666666666666667,0.0,-29.41176470588231,no
+multilingual-e5-base,wikipedia,M4_rulebased,0.01,-0.02,0.035,22.222222222222257,no
+multilingual-e5-base,wikipedia,M3_rule_expansion,0.0,-0.02,0.015124999999999885,0.0,no
+multilingual-e5-base,pilot,M4_rulebased,0.02,0.0,0.04,16.666666666666668,no
+multilingual-e5-base,pilot,M3_rule_expansion,0.0,-0.02,0.02,0.0,no

@@ -1,0 +1,13 @@
+encoder,subset,mitigation,improvement,lo,hi,recovery_%,significant
+DarijaBERT,pilot,M3_rule_expansion,0.016666666666666666,-0.006666666666666667,0.04,27.777777777777807,no
+multilingual-e5-base,wikipedia,M4_rulebased,0.01,-0.015,0.04,22.222222222222257,no
+multilingual-e5-base,pilot,M4_rulebased,0.02,0.0,0.04,16.666666666666668,no
+DarijaBERT,wikipedia,M3_rule_expansion,0.015,-0.02,0.05,11.538461538461538,no
+DarijaBERT,wikipedia,M4_rulebased,0.01,-0.03,0.05,7.6923076923076925,no
+multilingual-e5-base,pilot,M3_rule_expansion,0.0,-0.02,0.02,0.0,no
+multilingual-e5-base,wikipedia,M3_rule_expansion,0.0,-0.02,0.02,0.0,no
+DarijaBERT,pilot,M4_rulebased,0.0,-0.023333333333333334,0.02,0.0,no
+paraphrase-multilingual-MiniLM-L12-v2,pilot,M3_rule_expansion,-0.006666666666666667,-0.02,0.006666666666666667,-4.444444444444447,no
+paraphrase-multilingual-MiniLM-L12-v2,pilot,M4_rulebased,-0.006666666666666667,-0.03,0.013333333333333334,-4.444444444444447,no
+paraphrase-multilingual-MiniLM-L12-v2,wikipedia,M4_rulebased,-0.005,-0.025,0.015,-5.555555555555551,no
+paraphrase-multilingual-MiniLM-L12-v2,wikipedia,M3_rule_expansion,-0.01,-0.03,0.01,-11.111111111111102,no
