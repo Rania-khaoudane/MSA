@@ -1,9 +1,0 @@
-{
-  "total_qa_pairs": 300,
-  "total_corpus_chunks": 80,
-  "avg_items_per_chunk": 3.75,
-  "min_items_per_chunk": 1,
-  "max_items_per_chunk": 5,
-  "chunks_used": 80,
-  "chunks_unused": 0
-}

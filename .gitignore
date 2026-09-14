@@ -1,0 +1,21 @@
+# Run state — not reproducible artefacts
+*_checkpoint.json
+normalized_queries.json
+query_variants.json
+contexts.json
+
+# Model weights (reproduce with notebooks/07_finetune.ipynb)
+finetuned-dialect-encoder/
+*.safetensors
+*.bin
+
+# Secrets
+.env
+*.key
+**/kaggle.json
+
+# Python / Jupyter
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store

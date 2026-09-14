@@ -1,82 +1,113 @@
+# Dialect Mismatch in Arabic Retrieval-Augmented Generation
 
-# MSA–Darija Parallel QA Benchmark
+A benchmark, corpus and set of experiments measuring how Moroccan Darija queries
+perform against a Modern Standard Arabic (MSA) knowledge base in a RAG pipeline —
+at the retrieval stage and end-to-end.
 
-A parallel Modern Standard Arabic (MSA) / Moroccan Darija question-answering
-benchmark, built for the **Dialect-Aware Arabic Retrieval-Augmented Generation**
-project (target venue: IEEE-ICCA 2026).
+**Findings summary:** [`docs/FINDINGS.md`](docs/FINDINGS.md)
+**Full experimental record:** [`docs/EXPERIMENTAL_REPORT.md`](docs/EXPERIMENTAL_REPORT.md)
 
-This dataset is the C1 contribution of the project: a controlled benchmark in
-which each question exists in two aligned forms — an MSA version and a Darija
-version — over the same MSA knowledge base, grounded in real passage text.
-It is designed to let a RAG system be evaluated on retrieval and generation
-faithfulness under two conditions (MSA query vs. Darija query) against the
-identical corpus, isolating the effect of dialectal mismatch.
+---
 
-## Contents
+## Headline results
+
+| | Result |
+|---|---|
+| Dialectal queries reduce **Recall@1** by 14.7 points (0.706 → 0.559) | 95% CI [0.090, 0.185] |
+| Query normalisation (LLM, rule-based, expansion) recovers **none** of it | across 4 encoders × 4 strategies |
+| Cause: normalisation collapses the gold-vs-competitor ranking margin | +0.040 → +0.009 |
+| Contrastive fine-tuning closes **23%** of the Recall@1 gap | +0.070, 5/5 seeds, no MSA regression |
+| The gap does **not** significantly reach generated answers at top-5 | +0.044, CI [−0.029, +0.118] |
+| A single Arabic-only prompt constraint outperformed every retrieval-side fix | 0.824 → 0.882 correctness |
+
+---
+
+## Repository layout
 
 ```
 data/
-  corpus.json           80 MSA reference passages (id + text)
-  qa_pairs.json          300 QA items (id, msa_query, darija_query, gold_answer, source_chunk_id)
-  qa_pairs_merged.json   same 300 items, with source passage text joined in for convenience
-  stats.json              basic dataset statistics
-validation/
-  dataset_validation.ipynb   the automated validation notebook used to build this dataset
-  flagged_history/            record of items flagged and reviewed across build batches
-DATASHEET.md            full datasheet (motivation, composition, collection, uses, etc.)
-LICENSE
+  corpus.json              3,054 passages (2,974 Wikipedia + 80 pilot)
+  qa_pairs_wiki.json       200 Wikipedia-grounded MSA/Darija QA items
+  qa_pairs_all.json        all 500 items (pilot + Wikipedia)
+  pilot/
+    corpus_pilot.json      the 80 author-written passages
+    qa_pairs_pilot.json    the 300 pilot QA items
+notebooks/                 the pipeline, in execution order
+results/                   CSV outputs from the runs
+docs/                      findings summary and full experimental report
+LICENSE.md                 dual licensing — read before redistributing
 ```
 
-## Quick stats
+### Data schema
 
-| | |
-|---|---|
-| QA pairs | 300 |
-| Corpus passages | 80 |
-| Avg. items per passage | 3.75 |
-| Languages | Modern Standard Arabic (MSA), Moroccan Darija |
-| Topics | History, geography, social/economic issues, and everyday/daily-life conversation (shopping, services, family, religion, health, education, etc.) |
+Each QA item:
 
-## How this dataset was built
-
-Items were drafted with AI assistance against the 80-passage MSA corpus, then
-run through a 6-check automated validation pipeline (schema/referential
-integrity, MSA–Darija semantic alignment, dialect-authenticity lexicon scan,
-LLM-as-judge answer grounding, near-duplicate detection, and corpus coverage),
-and reviewed by a native Moroccan Darija speaker. See `DATASHEET.md` for full
-detail and `validation/` for the exact tooling used.
-
-## Using this dataset
-
-```python
-import json
-
-corpus = json.load(open("data/corpus.json", encoding="utf-8"))
-qa_pairs = json.load(open("data/qa_pairs.json", encoding="utf-8"))
-
-corpus_map = {c["chunk_id"]: c["text"] for c in corpus}
-
-# Example: matched (baseline) vs. mismatched (Darija) query for the same item
-item = qa_pairs[0]
-print("MSA query:   ", item["msa_query"])
-print("Darija query:", item["darija_query"])
-print("Gold answer: ", item["gold_answer"])
-print("Source text: ", corpus_map[item["source_chunk_id"]])
+```json
+{
+  "id": "w043",
+  "msa_query": "كم بلغ عدد سكان جماعة خنيفرة سنة 2024؟",
+  "darija_query": "شحال وصل عدد سكان جماعة خنيفرة فـ2024؟",
+  "gold_answer": "ارتفع عدد السكان إلى 123,738 نسمة حسب إحصاء 2024.",
+  "source_chunk_id": "wiki_02194"
+}
 ```
 
-For a RAG retrieval experiment, pool all passages in `corpus.json` into a
-single searchable index and query it with either `msa_query` (baseline
-condition) or `darija_query` (mismatch condition), using `source_chunk_id` as
-the retrieval ground truth for Recall@k / MRR.
+Each corpus passage carries a `source` field (`wikipedia_ar` or
+`pilot_synthetic`) and, for Wikipedia passages, an `article_title` for
+attribution.
 
-## License
+---
 
-See `LICENSE`. (Default suggestion: CC-BY-4.0 — update once finalized.)
+## Notebooks
+
+Run in order. All are Colab-ready; those marked GPU need a T4 or better.
+
+| # | Notebook | Purpose | GPU |
+|---|---|---|---|
+| 01 | `01_corpus_builder.ipynb` | Build the Wikipedia corpus | no |
+| 02 | `02_dataset_validation.ipynb` | Six-check benchmark validation | no |
+| 03 | `03_retrieval_baseline.ipynb` | Three-condition retrieval baseline | no |
+| 04 | `04_encoders_and_rulebased.ipynb` | Encoder sweep + rule-based mitigation | yes |
+| 05 | `05_confound_and_confidence_intervals.ipynb` | Subset analysis, bootstrap CIs | yes |
+| 06 | `06_arabic_encoders.ipynb` | GATE, AraBERT, Matryoshka encoders | yes |
+| 07 | `07_finetune.ipynb` | Contrastive fine-tuning | yes |
+| 08 | `08_finetune_robustness.ipynb` | Five seeds, ablation, per-subset | yes |
+| 09 | `09_finetune_wikipedia_only.ipynb` | Clean test, no author-written data | yes |
+| 10 | `10_generation_end_to_end.ipynb` | Generation + faithfulness, local LLM | yes |
+
+`optional_qa_generator_fewshot.ipynb` generates additional QA items using the
+hand-written set as few-shot examples.
+
+**Reproducing the fine-tuned encoder.** The weights are not committed (size).
+Notebook 07 reproduces them in roughly two minutes on a T4 from
+`intfloat/multilingual-e5-base`.
+
+---
+
+## Known limitations
+
+- 200 Wikipedia benchmark items; 68 generation evaluations; 7 retrieval-failure
+  cases. Behaviour on retrieval failure is **unresolved** — two runs disagreed.
+- One dialect (Moroccan Darija), one domain (Morocco-related Wikipedia), one
+  generator (Qwen2.5-7B-Instruct).
+- The 80 pilot passages are author-written. Questions written while reading
+  their passage share 0.561 of their tokens with it, against 0.360 for an
+  independent rewrite, so **pilot results carry an authorship confound**. This
+  is documented in the experimental report and is why the Wikipedia subset is
+  treated as primary throughout.
+
+---
+
+## Licensing
+
+**Dual-licensed — see [`LICENSE.md`](LICENSE.md) before redistributing.**
+
+Wikipedia-derived passages are **CC BY-SA 4.0** (attribution and share-alike
+required). All original work — QA pairs, notebooks, documentation — is
+**Apache 2.0**.
+
+---
 
 ## Citation
 
-If you use this dataset, please cite the associated paper (details to be
-added once published ).
-
-# MSA
-
+Paper in preparation. Please cite this repository in the interim.
