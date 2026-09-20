@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "gpdoc": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "c:\\Users\\Administrator\\.antigravity-ide\\extensions\\repetere.gpdoc-3.16.1-universal\\out\\mcp-server.js"
+      ]
+    }
+  }
+}

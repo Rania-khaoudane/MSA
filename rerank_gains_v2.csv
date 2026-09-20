@@ -1,0 +1,13 @@
+method,query,metric,gain,lo,hi,significant
+bge-reranker-v2-m3,msa_query,R@1,0.12,0.075,0.17,yes
+bge-reranker-v2-m3,msa_query,MRR,0.08750281458737343,0.0577530505952381,0.12031486815880198,yes
+bge-reranker-v2-m3,darija_query,R@1,0.18,0.12,0.245,yes
+bge-reranker-v2-m3,darija_query,MRR,0.13068754418096526,0.09405382707570208,0.17526645981942035,yes
+mmarco-mMiniLMv2-L12-H384-v1,msa_query,R@1,0.11,0.06,0.16,yes
+mmarco-mMiniLMv2-L12-H384-v1,msa_query,MRR,0.07562979871435754,0.04270952818627451,0.10952916296326222,yes
+mmarco-mMiniLMv2-L12-H384-v1,darija_query,R@1,0.095,0.03,0.165,yes
+mmarco-mMiniLMv2-L12-H384-v1,darija_query,MRR,0.06868098129940237,0.026535129691215215,0.10941128120782725,yes
+bge-reranker-base,msa_query,R@1,-0.235,-0.315,-0.155,worse
+bge-reranker-base,msa_query,MRR,-0.17687999990205874,-0.2271244681584755,-0.11957462411975281,worse
+bge-reranker-base,darija_query,R@1,-0.255,-0.34,-0.165,worse
+bge-reranker-base,darija_query,MRR,-0.21436693322587286,-0.27566167317804313,-0.1455173289725196,worse

@@ -1,0 +1,9 @@
+method,query,R@1,R@3,R@5,R@10,MRR
+no_rerank,msa_query,0.755,0.895,0.95,0.975,0.8374138520792933
+no_rerank,darija_query,0.62,0.83,0.905,0.95,0.7415624558190348
+bge-reranker-v2-m3,msa_query,0.875,0.96,0.995,0.995,0.9249166666666667
+bge-reranker-v2-m3,darija_query,0.8,0.94,0.96,0.97,0.87225
+mmarco-mMiniLMv2-L12-H384-v1,msa_query,0.865,0.95,0.97,0.99,0.9130436507936508
+mmarco-mMiniLMv2-L12-H384-v1,darija_query,0.715,0.895,0.925,0.95,0.8102434371184369
+bge-reranker-base,msa_query,0.52,0.755,0.845,0.935,0.6605338521772345
+bge-reranker-base,darija_query,0.365,0.62,0.72,0.815,0.5271955225931619
