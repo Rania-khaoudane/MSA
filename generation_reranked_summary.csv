@@ -1,0 +1,5 @@
+condition,n,gold_in_context,faithfulness,correctness,refusal_rate,judge_parsed,faithfulness_answered,correctness_answered
+C1_msa_e5,200,0.95,0.795,0.795,0.04,1.0,0.828125,0.828125
+C2_darija_e5,200,0.905,0.64,0.655,0.085,1.0,0.6994535519125683,0.7049180327868853
+C5_darija_reranked,200,0.96,0.735,0.72,0.075,1.0,0.7945945945945946,0.772972972972973
+C4_oracle,200,1.0,0.655,0.73,0.05,1.0,0.6894736842105263,0.7684210526315789
