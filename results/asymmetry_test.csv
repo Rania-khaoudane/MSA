@@ -1,0 +1,5 @@
+method,darija_gain,msa_gain,difference,lo,hi,verdict
+bge-reranker-v2-m3,0.18,0.12,0.06,-0.0001249999999999929,0.12,no significant asymmetry
+bge-reranker-base,-0.255,-0.235,-0.02,-0.115,0.065,no significant asymmetry
+GATE-Reranker-V1,0.07,0.065,0.005,-0.06,0.07,no significant asymmetry
+Namaa-ARA-Reranker-V1,-0.12,-0.155,0.035,-0.04,0.115,no significant asymmetry

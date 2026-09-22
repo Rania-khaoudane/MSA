@@ -1,0 +1,7 @@
+comparison,metric,diff,lo,hi,significant
+C1_msa_e5 vs C2_darija_e5,correct,0.055,0.0,0.11,no
+C1_msa_e5 vs C2_darija_e5,faithful,0.05,-0.005,0.1,no
+C5_darija_reranked vs C2_darija_e5,correct,0.015,-0.035124999999999997,0.075,no
+C5_darija_reranked vs C2_darija_e5,faithful,0.025,-0.03,0.085,no
+C1_msa_e5 vs C5_darija_reranked,correct,0.04,-0.02,0.1,no
+C1_msa_e5 vs C5_darija_reranked,faithful,0.025,-0.03,0.08,no

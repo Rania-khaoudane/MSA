@@ -1,0 +1,6 @@
+method,gap,lo,hi,significant
+bge-reranker-v2-m3,0.075,0.04,0.115,yes
+Namaa-ARA-Reranker-V1,0.1,0.04,0.16,yes
+GATE-Reranker-V1,0.13,0.08,0.18,yes
+no_rerank,0.135,0.09,0.19,yes
+bge-reranker-base,0.155,0.085,0.225,yes
