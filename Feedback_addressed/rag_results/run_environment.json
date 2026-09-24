@@ -1,0 +1,42 @@
+{
+  "python": "3.10.13",
+  "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.35",
+  "packages": {
+    "torch": "2.5.1+cu121",
+    "transformers": "4.57.1",
+    "sentence_transformers": "5.7.0",
+    "accelerate": "1.15.0",
+    "bitsandbytes": "0.50.2",
+    "numpy": "1.26.3",
+    "pandas": "2.2.1",
+    "rank_bm25": null,
+    "sklearn": "1.7.2"
+  },
+  "gpu": "NVIDIA RTX A4000, 16376 MiB, 570.195.03",
+  "cuda_runtime": "12.1",
+  "quantisation": {
+    "load_in_4bit": true,
+    "bnb_4bit_compute_dtype": "float16",
+    "bnb_4bit_quant_type": "nf4",
+    "bnb_4bit_use_double_quant": true,
+    "note": "compute dtype is pinned: float32 for the non-quantised modules changes most generated answers and shifts correctness materially"
+  },
+  "decoding": {
+    "do_sample": false,
+    "max_new_tokens": 96,
+    "note": "greedy decoding; temperature/top_p/top_k are unset and ignored"
+  },
+  "seed": 42,
+  "data_checksums": {
+    "corpus_v2.json": "088f07f21fefc9a59d25644b9c46b1dac71a0b2c0900fb32a9236645879a8374",
+    "qa_pairs_wiki.json": "2da7af1fd841e9eb7c0b5d409272e140041c31773715244dbdbadd964d20924f"
+  },
+  "result_checksums": {
+    "rag_generation_raw.csv": "7a419272b8c603e12badfa1bf4cea76ed32a0b0f784b1e9ab6b9683bb966b7a1",
+    "rag_generation_summary.csv": "dcf762cbf228dad748b13339c0bc32d2c8337812c440657975897644c8ee6158",
+    "rag_comparisons.csv": "674b6036949bbe34713708595ffc96c89ca085164a2e4d1d75a411b04c782bbd",
+    "rag_retrieval_summary.csv": "d96786fbeb1fa583c8bb6ad53db483f5dd48b17220b8c70e218ab3b193a6a40e"
+  },
+  "torch_cuda_available": true,
+  "gpu_name": "NVIDIA RTX A4000"
+}

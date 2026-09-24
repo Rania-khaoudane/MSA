@@ -1,0 +1,495 @@
+# =============================================================================
+# End-to-end RAG evaluation: retrieval -> (normalise | rerank | gate) -> generate
+#
+# Runs the full retrieval-augmented generation pipeline on the 200-item
+# Wikipedia benchmark, and measures the quality of the ANSWERS, not only the
+# ranking. Single source for the paper's normalisation and generation sections.
+#
+# Query conditions at the retrieval stage
+#   MSA              MSA question, hybrid retrieval
+#   Darija           Darija question, hybrid retrieval
+#   Darija-norm      Darija question rewritten into MSA by the LLM, then retrieved
+#   Darija-rerank    Darija question, top-20 reranked by the cross-encoder
+#   Darija-gated     reranked only when the top-1/top-2 margin <= tau
+#
+# Generation conditions (context = passages handed to the generator)
+#   A  MSA, retrieval, k=5              reference
+#   B  Darija, retrieval, k=5           dialect gap in answers
+#   C  Darija, retrieval, k=1           cost of a small context without reranking
+#   D  Darija-norm, retrieval, k=5      does normalisation reach the answers?
+#   E  Darija, reranked, k=5            reranking with a generous context
+#   F  Darija, reranked, k=1            reranking with a single passage
+#   G  Darija, gated, k=1               the proposed method
+#   H  Darija, gold passage             oracle ceiling
+#
+# The key question is F vs C and F vs B: reranking makes rank 1 reliable, so it
+# should let the generator work from ONE passage (5x shorter prompt) instead of
+# five, with little or no loss in answer quality. Without reranking, k=1 should
+# cost accuracy.
+#
+# Answers are scored two ways: an LLM judge (correct / faithful), and a
+# judge-free token-overlap F1 against the gold answer, so no result rests on the
+# judge alone. The script also exports a sheet for human validation of the judge.
+#
+# RUN with a GPU. Needs corpus_v2.json and qa_pairs_wiki.json in the same folder.
+# Everything is checkpointed; rerunning resumes. Roughly 2-3 hours on a T4 for
+# all 8 conditions (may be faster/slower on your server's GPU).
+# =============================================================================
+
+CONFIG = {
+    "corpus_file": "corpus_v2.json",
+    "qa_file": "qa_pairs_wiki.json",
+    "encoder": "intfloat/multilingual-e5-base",
+    "reranker": "BAAI/bge-reranker-v2-m3",
+    "generator": "Qwen/Qwen2.5-7B-Instruct",
+    # The judge is a separate phase, so it can be a different model. Using a
+    # different model than the generator avoids self-preference bias; 14B in
+    # 4-bit fits a T4 but is slower. Set equal to the generator to save time.
+    "judge": "Qwen/Qwen2.5-14B-Instruct",
+    "alpha": 0.8,
+    "rerank_depth": 20,
+    "tau": 0.10,
+    "conditions": ["A", "B", "C", "D", "E", "F", "G", "H"],
+    "gen_batch": 8,
+    "judge_batch": 4,
+    "max_new_tokens": 96,
+    "seed": 42,
+    "bootstrap_n": 1000,
+    "out": "rag_outputs",
+    # DRY_RUN replaces every model with a tiny stub so the logic can be checked
+    # in seconds without a GPU. Keep False for the real run.
+    "DRY_RUN": False,
+}
+
+import os, re, json, time, gc, random
+import numpy as np
+import pandas as pd
+
+OUT = CONFIG["out"]
+os.makedirs(OUT, exist_ok=True)
+os.makedirs("tables", exist_ok=True)
+os.makedirs("figures", exist_ok=True)
+
+corpus = json.load(open(CONFIG["corpus_file"], encoding="utf-8"))
+qa_all = json.load(open(CONFIG["qa_file"], encoding="utf-8"))
+ids = [c["chunk_id"] for c in corpus]
+texts = [c["text"] for c in corpus]
+pos = {cid: i for i, cid in enumerate(ids)}
+qa = [q for q in qa_all if q["source_chunk_id"] in pos]
+byid = {q["id"]: q for q in qa}
+print(f"Corpus {len(corpus)} passages | {len(qa)} benchmark questions")
+
+def ckpt_path(name): return os.path.join(OUT, name)
+def load_ckpt(name, default):
+    p = ckpt_path(name)
+    return json.load(open(p, encoding="utf-8")) if os.path.exists(p) else default
+def save_ckpt(name, obj):
+    json.dump(obj, open(ckpt_path(name), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+
+from rank_bm25 import BM25Okapi
+
+DIAC = re.compile(r"[\u0610-\u061A\u064B-\u065F\u06D6-\u06DC\u06DF-\u06E8\u06EA-\u06ED\u0670]")
+def norm_ar(t):
+    t = DIAC.sub("", t or "")
+    for a, b in [(r"[\u0625\u0623\u0622\u0627]", "\u0627"), (r"\u0649", "\u064A"),
+                 (r"\u0629", "\u0647"), (r"\u0624", "\u0648"), (r"\u0626", "\u064A"),
+                 (r"\u0640+", ""), (r"[^\w\s]", " ")]:
+        t = re.sub(a, b, t)
+    return re.sub(r"\s+", " ", t).strip()
+def tok(t): return norm_ar(t).split()
+def minmax(a):
+    lo, hi = a.min(), a.max()
+    return (a - lo) / (hi - lo) if hi > lo else np.zeros_like(a)
+
+bm25 = BM25Okapi([tok(t) for t in texts])
+
+try:
+    import torch
+except Exception:          # only needed for the real models, not for DRY_RUN
+    torch = None
+def free():
+    gc.collect()
+    if torch is not None and torch.cuda.is_available():
+        torch.cuda.empty_cache()
+
+if CONFIG["DRY_RUN"]:
+    class _Enc:
+        def encode(self, xs, **kw):
+            out = []
+            for x in xs:
+                r = np.random.default_rng(abs(hash(norm_ar(x.split(":", 1)[-1]))) % 2**32)
+                v = r.normal(size=32); out.append(v / np.linalg.norm(v))
+            return np.asarray(out, "float32")
+    class _CE:
+        def predict(self, pairs, **kw):
+            return np.random.default_rng(len(pairs)).normal(size=len(pairs))
+    def load_encoder(): return _Enc()
+    def load_reranker(): return _CE()
+else:
+    from sentence_transformers import SentenceTransformer, CrossEncoder
+    def load_encoder(): return SentenceTransformer(CONFIG["encoder"])
+    def load_reranker():
+        return CrossEncoder(CONFIG["reranker"], max_length=512, trust_remote_code=True,
+                            automodel_args={"torch_dtype": torch.float32})
+
+D = CONFIG["rerank_depth"]
+enc = load_encoder()
+emb = np.asarray(enc.encode([f"passage: {t}" for t in texts], normalize_embeddings=True,
+                            batch_size=32, show_progress_bar=not CONFIG["DRY_RUN"]), "float32")
+
+def retrieve(query):
+    """Top-D passage ids and the deployable top-1/top-2 margin."""
+    qe = enc.encode([f"query: {query}"], normalize_embeddings=True)[0]
+    s = CONFIG["alpha"] * minmax(emb @ qe) + (1 - CONFIG["alpha"]) * minmax(np.asarray(bm25.get_scores(tok(query))))
+    order = np.argsort(-s)[:D]
+    return [ids[i] for i in order], float(s[order[0]] - s[order[1]])
+
+retr = load_ckpt("retrieval.json", {})
+for field, name in [("msa_query", "MSA"), ("darija_query", "Darija")]:
+    if name in retr:
+        continue
+    retr[name] = {}
+    for q in qa:
+        cands, m = retrieve(q[field])
+        retr[name][q["id"]] = {"cands": cands, "margin": m}
+    save_ckpt("retrieval.json", retr)
+print("retrieved:", list(retr))
+
+if CONFIG["DRY_RUN"]:
+    tokenizer = None
+    def chat_batch(prompts, max_new_tokens=96):
+        r = np.random.default_rng(len(prompts))
+        outs = []
+        for p in prompts:
+            if "مدعوم:" in p:
+                outs.append(f"مدعوم: {'نعم' if r.random() < .8 else 'لا'}\nمطابق: {'نعم' if r.random() < .7 else 'لا'}")
+            elif "بالعربية الفصحى" in p and "الدارجة" in p:
+                outs.append(p.strip().split("\n")[-2].replace("الدارجة:", "").strip())
+            else:
+                outs.append("المعلومة غير متوفرة في النصوص" if r.random() < .1 else "إجابة تجريبية")
+        return outs
+    def n_tokens(text): return len(text.split())
+    def load_llm(name): pass
+else:
+    from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
+    llm = tokenizer = None
+    def load_llm(name):
+        global llm, tokenizer
+        if llm is not None:
+            del llm; free()
+        q4 = BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_compute_dtype=torch.float16,
+                                bnb_4bit_quant_type="nf4", bnb_4bit_use_double_quant=True)
+        tokenizer = AutoTokenizer.from_pretrained(name)
+        if tokenizer.pad_token is None:
+            tokenizer.pad_token = tokenizer.eos_token
+        tokenizer.padding_side = "left"
+        llm = AutoModelForCausalLM.from_pretrained(name, quantization_config=q4, device_map="auto",
+                                                   torch_dtype=torch.float16).eval()
+        print("loaded", name)
+    @torch.no_grad()
+    def chat_batch(prompts, max_new_tokens=96):
+        t = [tokenizer.apply_chat_template([{"role": "user", "content": p}], tokenize=False,
+                                           add_generation_prompt=True) for p in prompts]
+        e = tokenizer(t, return_tensors="pt", padding=True, truncation=True, max_length=4096).to(llm.device)
+        o = llm.generate(**e, max_new_tokens=max_new_tokens, do_sample=False,
+                         pad_token_id=tokenizer.pad_token_id)
+        return [tokenizer.decode(g, skip_special_tokens=True).strip() for g in o[:, e["input_ids"].shape[1]:]]
+    def n_tokens(text): return len(tokenizer(text)["input_ids"])
+
+load_llm(CONFIG["generator"])
+
+# Few-shot examples are generic and deliberately unrelated to the benchmark topics.
+NORM_PROMPT = """أعد صياغة السؤال المكتوب بالدارجة المغربية بالعربية الفصحى، مع الحفاظ على المعنى نفسه تماما.
+اكتب السؤال المعاد صياغته فقط، بدون شرح.
+
+الدارجة: فين كاين المطار الجديد ديال المدينة؟
+الفصحى: أين يقع المطار الجديد للمدينة؟
+
+الدارجة: علاش الناس كيفضلو القطار على الطوبيس؟
+الفصحى: لماذا يفضل الناس القطار على الحافلة؟
+
+الدارجة: {q}
+الفصحى:"""
+
+normed = load_ckpt("normalized.json", {})
+todo = [q for q in qa if q["id"] not in normed]
+for i in range(0, len(todo), CONFIG["gen_batch"]):
+    b = todo[i:i + CONFIG["gen_batch"]]
+    for q, out in zip(b, chat_batch([NORM_PROMPT.format(q=q["darija_query"]) for q in b], 64)):
+        line = (out or "").strip().split("\n")[0].replace("الفصحى:", "").strip().strip('"«»')
+        normed[q["id"]] = line or q["darija_query"]
+    save_ckpt("normalized.json", normed)
+print(f"normalised {len(normed)} questions. Example:")
+ex = qa[0]
+print("  Darija:", ex["darija_query"]); print("  Norm:  ", normed[ex["id"]]); print("  MSA:   ", ex["msa_query"])
+
+if "Darija-norm" not in retr:
+    retr["Darija-norm"] = {}
+    for q in qa:
+        cands, m = retrieve(normed[q["id"]])
+        retr["Darija-norm"][q["id"]] = {"cands": cands, "margin": m}
+    save_ckpt("retrieval.json", retr)
+del enc, emb; free()
+
+if "Darija-rerank" not in retr:
+    ce = load_reranker()
+    retr["Darija-rerank"], retr["Darija-gated"] = {}, {}
+    for q in qa:
+        r = retr["Darija"][q["id"]]
+        sc = np.asarray(ce.predict([(q["darija_query"], texts[pos[c]]) for c in r["cands"]],
+                                   batch_size=16, show_progress_bar=False))
+        if sc.ndim > 1:
+            sc = sc[:, -1]
+        reranked = [r["cands"][j] for j in np.argsort(-sc)]
+        gated = r["margin"] <= CONFIG["tau"]
+        retr["Darija-rerank"][q["id"]] = {"cands": reranked, "margin": r["margin"]}
+        retr["Darija-gated"][q["id"]] = {"cands": reranked if gated else r["cands"],
+                                         "margin": r["margin"], "reranked": bool(gated)}
+    save_ckpt("retrieval.json", retr)
+    del ce; free()
+gate_frac = np.mean([v["reranked"] for v in retr["Darija-gated"].values()])
+print(f"gate at tau={CONFIG['tau']}: {gate_frac:.1%} of Darija queries reranked")
+
+rng = np.random.default_rng(CONFIG["seed"])
+def boot(d):
+    d = np.asarray(d, float)
+    m = d[rng.integers(0, len(d), size=(CONFIG["bootstrap_n"], len(d)))].mean(1)
+    return d.mean(), *np.percentile(m, [2.5, 97.5])
+
+def rank_vec(name):
+    out = []
+    for q in qa:
+        c = retr[name][q["id"]]["cands"]
+        out.append(c.index(q["source_chunk_id"]) + 1 if q["source_chunk_id"] in c else 0)
+    return np.array(out)
+
+ranks = {n: rank_vec(n) for n in ["MSA", "Darija", "Darija-norm", "Darija-rerank", "Darija-gated"]}
+def r_at(r, k): return ((r > 0) & (r <= k)).astype(float)
+def mrr(r): return np.where(r > 0, 1.0 / np.maximum(r, 1), 0.0)
+
+rows = []
+for n, r in ranks.items():
+    d, lo, hi = boot(r_at(r, 1) - r_at(ranks["Darija"], 1))
+    rows.append({"condition": n, "R@1": r_at(r, 1).mean(), "R@5": r_at(r, 5).mean(),
+                 "MRR": mrr(r).mean(), "dR1_vs_Darija": d, "lo": lo, "hi": hi})
+retr_df = pd.DataFrame(rows)
+retr_df.to_csv(ckpt_path("rag_retrieval_summary.csv"), index=False)
+print(retr_df.to_string(index=False, float_format=lambda x: f"{x:.3f}"))
+
+labels = {"MSA": "MSA query", "Darija": "Darija query", "Darija-norm": "Darija, normalised to MSA",
+          "Darija-rerank": "Darija, reranked", "Darija-gated": f"Darija, margin-gated ($\\tau={CONFIG['tau']:.2f}$)"}
+lines = []
+for _, r in retr_df.iterrows():
+    delta = "--" if r.condition == "Darija" else f"{r.dR1_vs_Darija:+.3f} [{r.lo:+.3f}, {r.hi:+.3f}]"
+    lines.append(f"{labels[r.condition]} & {r['R@1']:.3f} & {r['R@5']:.3f} & {r.MRR:.3f} & {delta}\\\\")
+open("tables/table5_retrieval_conditions.tex", "w").write("\n".join(lines) + "\n")
+print("saved tables/table5_retrieval_conditions.tex")
+
+GEN_PROMPT = """أجب عن السؤال التالي اعتمادا فقط على النصوص المرفقة.
+
+قواعد إلزامية:
+- أجب بالعربية فقط. ممنوع استعمال أي كلمة بحرف لاتيني.
+- إذا لم تكن الإجابة موجودة في النصوص، اكتب بالضبط: المعلومة غير متوفرة في النصوص
+- لا تستعمل أي معرفة خارجية.
+- أجب بجملة واحدة قصيرة فقط.
+
+النصوص:
+{context}
+
+السؤال: {question}
+
+الإجابة:"""
+
+COND = {
+    "A": ("MSA", 5, "msa_query"),
+    "B": ("Darija", 5, "darija_query"),
+    "C": ("Darija", 1, "darija_query"),
+    "D": ("Darija-norm", 5, "darija_query"),
+    "E": ("Darija-rerank", 5, "darija_query"),
+    "F": ("Darija-rerank", 1, "darija_query"),
+    "G": ("Darija-gated", 1, "darija_query"),
+    "H": ("oracle", 1, "darija_query"),
+}
+COND_LABEL = {"A": "MSA · retrieval · k=5", "B": "Darija · retrieval · k=5",
+              "C": "Darija · retrieval · k=1", "D": "Darija · normalised · k=5",
+              "E": "Darija · reranked · k=5", "F": "Darija · reranked · k=1",
+              "G": "Darija · gated · k=1", "H": "Darija · gold passage"}
+
+def context_ids(c, qid):
+    name, k, _ = COND[c]
+    if name == "oracle":
+        return [byid[qid]["source_chunk_id"]]
+    return retr[name][qid]["cands"][:k]
+def ctx_text(cids): return "\n\n".join(f"[{i+1}] {texts[pos[c]]}" for i, c in enumerate(cids))
+
+gen = load_ckpt("generations.json", [])
+done = {(g["qid"], g["cond"]) for g in gen}
+for c in CONFIG["conditions"]:
+    todo = [q for q in qa if (q["id"], c) not in done]
+    if not todo:
+        continue
+    print(f"generating {c}: {COND_LABEL[c]} ({len(todo)} left)")
+    for i in range(0, len(todo), CONFIG["gen_batch"]):
+        b = todo[i:i + CONFIG["gen_batch"]]
+        cids = [context_ids(c, q["id"]) for q in b]
+        prompts = [GEN_PROMPT.format(context=ctx_text(x), question=q[COND[c][2]]) for q, x in zip(b, cids)]
+        t0 = time.time()
+        outs = chat_batch(prompts, CONFIG["max_new_tokens"])
+        dt = (time.time() - t0) / len(b)
+        for q, x, p, a in zip(b, cids, prompts, outs):
+            gen.append({"qid": q["id"], "cond": c, "context": x, "answer": a,
+                        "gold_in_context": int(q["source_chunk_id"] in x),
+                        "prompt_tokens": n_tokens(p), "gen_seconds": dt})
+        save_ckpt("generations.json", gen)
+print(f"{len(gen)} generations")
+
+load_llm(CONFIG["judge"])
+JUDGE_PROMPT = """النصوص المرجعية:
+{context}
+
+السؤال: {question}
+الإجابة الصحيحة: {gold}
+الإجابة المقدمة: {answer}
+
+أجب عن سؤالين بدقة:
+1. هل كل ما ورد في الإجابة المقدمة مدعوم صراحة بالنصوص المرجعية؟
+2. هل الإجابة المقدمة مطابقة في المعنى للإجابة الصحيحة؟ اختلاف الصياغة مقبول، أما اختلاف الأرقام أو الأسماء أو التواريخ فغير مقبول.
+
+أجب بهذا الشكل فقط وبدون أي شرح:
+مدعوم: نعم/لا
+مطابق: نعم/لا"""
+def parse(v):
+    f = c = 0
+    for line in (v or "").replace("،", " ").split("\n"):
+        if "مدعوم" in line: f = int("نعم" in line)
+        elif "مطابق" in line: c = int("نعم" in line)
+    return f, c
+
+todo = [g for g in gen if "correct" not in g]
+for i in range(0, len(todo), CONFIG["judge_batch"]):
+    b = todo[i:i + CONFIG["judge_batch"]]
+    vs = chat_batch([JUDGE_PROMPT.format(context=ctx_text(g["context"]), question=byid[g["qid"]]["msa_query"],
+                                         gold=byid[g["qid"]]["gold_answer"], answer=g["answer"]) for g in b], 24)
+    for g, v in zip(b, vs):
+        g["faithful"], g["correct"] = parse(v)
+    save_ckpt("generations.json", gen)
+print("judged", sum("correct" in g for g in gen))
+
+REFUSAL = "غير متوفرة"
+def f1(pred, gold):
+    p, g = tok(pred), tok(gold)
+    if not p or not g:
+        return 0.0
+    common = sum(min(p.count(w), g.count(w)) for w in set(p))
+    if common == 0:
+        return 0.0
+    pr, rc = common / len(p), common / len(g)
+    return 2 * pr * rc / (pr + rc)
+
+df = pd.DataFrame(gen)
+df["refused"] = df.answer.fillna("").str.contains(REFUSAL).astype(int)
+df["token_f1"] = [0.0 if r else f1(a, byid[q]["gold_answer"]) for a, q, r in zip(df.answer, df.qid, df.refused)]
+df.to_csv(ckpt_path("rag_generation_raw.csv"), index=False)
+
+order = [c for c in COND if c in set(df.cond)]
+summ = df.groupby("cond").agg(
+    n=("qid", "count"), gold_in_context=("gold_in_context", "mean"),
+    correct=("correct", "mean"), faithful=("faithful", "mean"),
+    token_f1=("token_f1", "mean"), refusal=("refused", "mean"),
+    prompt_tokens=("prompt_tokens", "mean"), gen_seconds=("gen_seconds", "mean"),
+).reindex(order)
+summ.insert(0, "condition", [COND_LABEL[c] for c in summ.index])
+summ.to_csv(ckpt_path("rag_generation_summary.csv"))
+print(summ.to_string(float_format=lambda x: f"{x:.3f}"))
+
+def paired(a, b, col):
+    x = df[df.cond == a].set_index("qid")[col]; y = df[df.cond == b].set_index("qid")[col]
+    idx = x.index.intersection(y.index)
+    return boot(x.loc[idx].values - y.loc[idx].values)
+
+COMPARE = [
+    ("B", "A", "Dialect gap in answers (k=5)"),
+    ("C", "B", "Cost of k=1 without reranking"),
+    ("F", "C", "Reranking at k=1"),
+    ("F", "B", "Reranked k=1 vs retrieval k=5"),
+    ("E", "B", "Reranking at k=5"),
+    ("D", "B", "Normalisation, end to end"),
+    ("G", "F", "Gating vs always reranking (k=1)"),
+    ("H", "F", "Headroom to the oracle"),
+]
+crow = []
+for a, b, lab in COMPARE:
+    if a not in order or b not in order:
+        continue
+    for col in ["correct", "token_f1"]:
+        d, lo, hi = paired(a, b, col)
+        crow.append({"comparison": lab, "a": a, "b": b, "metric": col, "diff": d, "lo": lo, "hi": hi,
+                     "significant": "yes" if lo > 0 or hi < 0 else "no"})
+cmp_df = pd.DataFrame(crow)
+cmp_df.to_csv(ckpt_path("rag_comparisons.csv"), index=False)
+print(cmp_df.to_string(index=False, float_format=lambda x: f"{x:+.3f}"))
+
+lines = []
+for c, r in summ.iterrows():
+    lines.append(f"{COND_LABEL[c].replace('·', '&')} & {r.gold_in_context:.3f} & {r.correct:.3f} & "
+                 f"{r.token_f1:.3f} & {r.prompt_tokens:,.0f}\\\\".replace(",", "{,}"))
+open("tables/table6_rag.tex", "w").write("\n".join(lines) + "\n")
+print("saved tables/table6_rag.tex")
+
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 9.5, "axes.spines.top": False,
+                     "axes.spines.right": False, "axes.grid": True, "grid.color": "#e6e6e6",
+                     "axes.axisbelow": True, "axes.titleweight": "bold", "axes.titlelocation": "left",
+                     "axes.titlepad": 17, "legend.frameon": False, "savefig.bbox": "tight", "savefig.dpi": 300})
+COL = {"A": "#0072B2", "B": "#D55E00", "C": "#D55E00", "D": "#CC79A7",
+       "E": "#009E73", "F": "#009E73", "G": "#E69F00", "H": "#8a8a8a"}
+fig, ax = plt.subplots(figsize=(6.4, 0.42 * len(order) + 1.4))
+for i, c in enumerate(order):
+    v = df[df.cond == c]["correct"].values
+    m, lo, hi = boot(v - 0)
+    ax.errorbar(m, i, xerr=[[m - lo], [hi - m]], fmt="o", color=COL[c], ms=8, capsize=3,
+                mfc=COL[c] if COND[c][1] == 1 else "white", mew=2)
+    ax.text(hi + 0.012, i, f"{m:.3f}  ·  {summ.loc[c, 'prompt_tokens']:,.0f} tok",
+            va="center", fontsize=8, color="#444")
+ax.set_yticks(range(len(order))); ax.set_yticklabels([COND_LABEL[c] for c in order])
+ax.invert_yaxis(); ax.set_xlabel("Answer correctness (LLM judge, 95% CI)")
+ax.set_xlim(max(0, df.correct.mean() - 0.35), 1.08)
+ax.set_title("End-to-end answer quality")
+ax.text(0, 1.012, "Filled marker = one passage in context; label shows mean prompt length",
+        transform=ax.transAxes, fontsize=8.3, color="#8a8a8a", va="bottom")
+for ext in ("pdf", "png"):
+    fig.savefig(f"figures/fig6_rag.{ext}")
+plt.close(fig)
+
+def get(a, b, col="correct"):
+    s = cmp_df[(cmp_df.a == a) & (cmp_df.b == b) & (cmp_df.metric == col)]
+    return None if s.empty else s.iloc[0]
+def say(r): return f"{r['diff']:+.3f} (95% CI [{r.lo:+.3f}, {r.hi:+.3f}], {'significant' if r.significant == 'yes' else 'not significant'})"
+
+rn = retr_df.set_index("condition")
+print("\n--- paste-ready numbers ---")
+print(f"Normalisation, retrieval: Darija R@1 {rn.loc['Darija','R@1']:.3f} -> {rn.loc['Darija-norm','R@1']:.3f}, "
+      f"change {rn.loc['Darija-norm','dR1_vs_Darija']:+.3f} [{rn.loc['Darija-norm','lo']:+.3f}, {rn.loc['Darija-norm','hi']:+.3f}]")
+print(f"Reranking, retrieval:     Darija R@1 {rn.loc['Darija','R@1']:.3f} -> {rn.loc['Darija-rerank','R@1']:.3f}")
+for a, b, lab in COMPARE:
+    r = get(a, b)
+    if r is not None:
+        print(f"{lab:<36} correctness {say(r)}")
+tok_ratio = summ.loc["B", "prompt_tokens"] / summ.loc["F", "prompt_tokens"] if {"B", "F"} <= set(summ.index) else float("nan")
+print(f"Prompt length, retrieval k=5 vs reranked k=1: {tok_ratio:.1f}x shorter with k=1")
+
+parts = []
+for c, g in df.groupby("cond"):
+    parts.append(g.sample(min(len(g), max(1, 100 // len(order))), random_state=CONFIG["seed"]))
+sheet = pd.concat(parts).head(100)
+sheet = pd.DataFrame({"qid": sheet.qid, "condition": sheet.cond,
+                      "gold_answer": [byid[q]["gold_answer"] for q in sheet.qid],
+                      "model_answer": sheet.answer, "llm_correct": sheet.correct, "human_correct": ""})
+sheet.to_csv(ckpt_path("judge_labeling_sheet.csv"), index=False, encoding="utf-8-sig")
+print("\nsaved", ckpt_path("judge_labeling_sheet.csv"), "(label human_correct 0/1, then score it)")
+
+import shutil
+shutil.make_archive("rag_results", "zip", ".", OUT)
+print("\nWrote rag_results.zip, tables/, figures/")

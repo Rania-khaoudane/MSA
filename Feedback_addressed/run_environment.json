@@ -1,0 +1,99 @@
+{
+  "python": "3.10.13",
+  "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.35",
+  "packages": {
+    "torch": "2.5.1+cu121",
+    "transformers": "4.57.1",
+    "sentence-transformers": "5.7.0",
+    "accelerate": "1.15.0",
+    "bitsandbytes": "0.50.2",
+    "numpy": "1.26.3",
+    "pandas": "2.2.1",
+    "rank-bm25": "0.2.2",
+    "scikit-learn": "1.7.2"
+  },
+  "gpu": "NVIDIA RTX A4000, 16376 MiB, 570.195.03",
+  "models": {
+    "retrieval_encoder": "intfloat/multilingual-e5-base",
+    "hybrid_weight_alpha": 0.8,
+    "reranker": "BAAI/bge-reranker-v2-m3 (top-20 candidates)",
+    "generator": "Qwen/Qwen2.5-7B-Instruct",
+    "second_generator": "MBZUAI-Paris/Atlas-Chat-9B"
+  },
+  "judge": {
+    "model": "MBZUAI-Paris/Atlas-Chat-9B",
+    "prompt": "v2 (explicit refusal and paraphrase rules)",
+    "selection": "chosen among four configurations on 96 human-labelled answers",
+    "kappa_by_configuration": {
+      "Atlas-Chat-9B / v2": {
+        "kappa": 0.797,
+        "agreement": 0.906,
+        "parse_rate": 1.0
+      },
+      "Atlas-Chat-9B / v1": {
+        "kappa": 0.776,
+        "agreement": 0.896,
+        "parse_rate": 1.0
+      },
+      "Qwen2.5-14B-Instruct / v1": {
+        "kappa": 0.565,
+        "agreement": 0.802,
+        "parse_rate": 1.0
+      },
+      "Qwen2.5-14B-Instruct / v2": {
+        "kappa": 0.537,
+        "agreement": 0.802,
+        "parse_rate": 1.0
+      }
+    },
+    "note": "the second generator's answers are evaluated with token-F1 (judge-free), because Atlas-Chat-9B judging its own answers showed self-preference"
+  },
+  "quantisation": {
+    "load_in_4bit": true,
+    "bnb_4bit_compute_dtype": "float16",
+    "bnb_4bit_quant_type": "nf4",
+    "bnb_4bit_use_double_quant": true,
+    "note": "compute dtype is pinned: float32 for the non-quantised modules changes most generated answers and shifts correctness materially"
+  },
+  "decoding": {
+    "do_sample": false,
+    "max_new_tokens_generation": 96,
+    "max_new_tokens_judge": 32,
+    "note": "greedy decoding; temperature/top_p/top_k are unset and ignored"
+  },
+  "statistics": {
+    "bootstrap_resamples": 4000,
+    "seed": 42,
+    "multiple_comparisons": "Holm-Bonferroni within each metric",
+    "primary_hypothesis": "MSA vs Darija Recall@1 (uncorrected)"
+  },
+  "data_checksums": {
+    "corpus_v2.json": "088f07f21fefc9a59d25644b9c46b1dac71a0b2c0900fb32a9236645879a8374",
+    "qa_pairs_wiki.json": "2da7af1fd841e9eb7c0b5d409272e140041c31773715244dbdbadd964d20924f"
+  },
+  "final_results_checksums": {
+    "final_results/PAPER_NUMBERS.md": "a472effb99978c1b0aa3ee0dd0952a2f0c846a3aa3e49e9d3b798db67bba6f3f",
+    "final_results/checksums.json": "00f1118ae319f3a6b07bc17acfa1be7b1065d306c8112cfdf8c0a50d1d4f33ad",
+    "final_results/comparisons.csv": "199c46ef0fa35c2f9720d74b0bf7fa84e4de9d60aa0b88a779cc26a934787a32",
+    "final_results/dev_test_split.csv": "4b3f2836361c519b1c7a269a2e363afa9760e37f82621768a344cd7a7f93c849",
+    "final_results/fig6_rag.pdf": "2543a5f1c14cfed4676a94285a7f99d265e468c326114bfecf9a09f8a0b6172e",
+    "final_results/fig6_rag.png": "586878545bcc0fc415decba460896f1a5b78dc8f80d86ef5adf42e82c7372da2",
+    "final_results/judge_selection.csv": "f9974e37ad75438adb21a6e187d042ad25a86f6b6c8c8e404089a5a6b2bcd5d4",
+    "final_results/main_results_raw.csv": "af29e9e7a08f196b6d874a8f3467995fde0f533c7a4e95665679580bd55c8038",
+    "final_results/main_summary.csv": "3e6d890d780afc8d61be2118057ebcf72b93bf33d1d1c1f4fa9ce84f84dd5188",
+    "final_results/oracle_check.csv": "aa71b722d9721c8bfc477de373764f35e5434cf1e9cb36e58a286f7fe0e63470",
+    "final_results/prompt_sensitivity.csv": "506c7c726d3db5579d41d2bf7780ef2259aaf740361adb55dbe3c4e37a143e79",
+    "final_results/prompt_sensitivity_comparisons.csv": "964198be59d391c4e35361f21087ea3991aaed5aed2f7b5ea3d1cbb467cbb1f0",
+    "final_results/retrieval_summary.csv": "adfd056ca60654fdb834f38e9800b96b924a5a6d3f08a5a3ecc45202428211f2",
+    "final_results/second_generator_agreement.csv": "4e530bbe928eb620c1bc1ec1ed9cc2bcb3c11f5aa567b89ff22ad4e43208cacb",
+    "final_results/second_generator_tokenf1.csv": "8c55f2c879534f993fd928b700f8b46d87267ab223a0741f2232d1106cd6ec20",
+    "final_results/tables/table6_rag.tex": "09d4dfeb7fe5aea212aba4ac32dc26335f849eef68352d2250dfe21b5675dddd",
+    "final_results/tables/table7_prompt_sensitivity.tex": "9e6b09d229eedc98942fd033fe0e0013b739f8852bcd8b6296ba371aaed6d73d",
+    "final_results/tables/table_comparisons.tex": "1c480dcd8558a30ca7365550b55109271aae7fb1fe57a8c099ffcc486068c807",
+    "final_results/tables/table_judge.tex": "ba6088fd86bb347e28fd4f391a83dba8be6d6c274cdaf59b30e2c5a8bde852db",
+    "final_results/tables/table_second_generator.tex": "31b9fc7d871da308d59ee690e42d775f705bd351ff61ccb6127680f7036238ee"
+  },
+  "cuda_runtime": "12.1",
+  "torch_cuda_available": true,
+  "gpu_name": "NVIDIA RTX A4000"
+}

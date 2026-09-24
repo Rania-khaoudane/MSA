@@ -1,0 +1,17 @@
+comparison,a,b,metric,diff,lo,hi,significant
+Dialect gap in answers (k=5),B,A,correct,-0.095,-0.155,-0.04,yes
+Dialect gap in answers (k=5),B,A,token_f1,-0.0879378852046361,-0.13121710104233056,-0.046680105068980855,yes
+Cost of k=1 without reranking,C,B,correct,-0.205,-0.275,-0.14,yes
+Cost of k=1 without reranking,C,B,token_f1,-0.058434044930615506,-0.10512018577439944,-0.013308067457516583,yes
+Reranking at k=1,F,C,correct,0.125,0.08,0.17,yes
+Reranking at k=1,F,C,token_f1,0.0853387642858231,0.05538060657343746,0.11760526082169463,yes
+Reranked k=1 vs retrieval k=5,F,B,correct,-0.08,-0.145,-0.02,yes
+Reranked k=1 vs retrieval k=5,F,B,token_f1,0.026904719355207617,-0.010910754333092415,0.06306288000075713,no
+Reranking at k=5,E,B,correct,-0.01,-0.07,0.045,no
+Reranking at k=5,E,B,token_f1,0.00015632234410095536,-0.03534164224030232,0.031042754237021256,no
+"Normalisation, end to end",D,B,correct,-0.06,-0.12,0.0,no
+"Normalisation, end to end",D,B,token_f1,-0.029252109270747083,-0.06650396432958358,0.007547919629914817,no
+Gating vs always reranking (k=1),G,F,correct,-0.01,-0.025,0.0,no
+Gating vs always reranking (k=1),G,F,token_f1,-0.005532467532467533,-0.017821753246753246,0.0023636363636363638,no
+Headroom to the oracle,H,F,correct,0.05,0.01,0.095,yes
+Headroom to the oracle,H,F,token_f1,0.03464706224844476,0.014355656278943552,0.059142037865119554,yes

@@ -1,0 +1,17 @@
+family,comparison,estimate,lo,hi,p_raw,p_holm,sig_raw,sig_holm
+generation,Dialect gap in answers (k=5) [token_f1],-0.0879378852046361,-0.1322157759294958,-0.045388420881436076,0.00025,0.004,yes,yes
+generation,Cost of k=1 without reranking [correct],-0.205,-0.27,-0.14,0.00025,0.004,yes,yes
+generation,Reranking at k=1 [correct],0.125,0.075,0.18,0.00025,0.004,yes,yes
+generation,Reranking at k=1 [token_f1],0.0853387642858231,0.05389726633932516,0.1186732063402284,0.00025,0.004,yes,yes
+generation,Headroom to the oracle [token_f1],0.03464706224844476,0.01434683503529886,0.057446436956003454,0.00025,0.004,yes,yes
+generation,Dialect gap in answers (k=5) [correct],-0.095,-0.155,-0.04,0.0025,0.0275,yes,yes
+generation,Cost of k=1 without reranking [token_f1],-0.05843404493061549,-0.10538269494206809,-0.013815948226783474,0.0075,0.075,yes,no
+generation,Reranked k=1 vs retrieval k=5 [correct],-0.08,-0.145,-0.015,0.0145,0.1305,yes,no
+generation,Headroom to the oracle [correct],0.05,0.01,0.095,0.0255,0.204,yes,no
+generation,"Normalisation, end to end [correct]",-0.06,-0.12,0.0,0.072,0.504,no,no
+generation,"Normalisation, end to end [token_f1]",-0.029252109270747076,-0.06641887602948505,0.006243676416017265,0.1075,0.645,no,no
+generation,Reranked k=1 vs retrieval k=5 [token_f1],0.026904719355207617,-0.011261209869975312,0.06473640281145518,0.178,0.8899999999999999,no,no
+generation,Gating vs always reranking (k=1) [correct],-0.01,-0.025,0.0,0.284,1.0,no,no
+generation,Gating vs always reranking (k=1) [token_f1],-0.005532467532467532,-0.01753246753246753,0.00264935064935065,0.362,1.0,no,no
+generation,Reranking at k=5 [correct],-0.01,-0.065,0.045,0.787,1.0,no,no
+generation,Reranking at k=5 [token_f1],0.00015632234410095536,-0.03352761328814689,0.03529695803377075,0.9935,1.0,no,no

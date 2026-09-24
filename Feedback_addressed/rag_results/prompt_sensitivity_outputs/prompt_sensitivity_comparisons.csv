@@ -1,0 +1,7 @@
+comparison,prompt,diff,lo,hi,significant
+dialect gap,P1,-0.095,-0.155,-0.04,yes
+dialect gap,P2,-0.085,-0.15,-0.02,yes
+dialect gap,P3,-0.04,-0.1,0.02,no
+reranked k=1 vs k=5,P1,-0.08,-0.145,-0.019875000000000684,yes
+reranked k=1 vs k=5,P2,-0.01,-0.065,0.045,no
+reranked k=1 vs k=5,P3,-0.065,-0.125,-0.009875000000000682,yes

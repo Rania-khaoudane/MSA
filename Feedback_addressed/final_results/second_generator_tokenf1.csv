@@ -1,0 +1,5 @@
+comparison,qwen_tokenf1,qwen_sig,atlas_tokenf1,atlas_sig,atlas_selfjudged,atlas_selfjudged_sig
+Dialect gap in answers,"-0.088 [-0.133, -0.046]",True,"-0.117 [-0.146, -0.086]",True,"-0.040 [-0.085, +0.005]",False
+Reranking at k=1,"+0.085 [+0.056, +0.119]",True,"+0.070 [+0.041, +0.101]",True,"+0.175 [+0.115, +0.240]",True
+Cost of k=1 without reranking,"-0.058 [-0.105, -0.013]",True,"-0.050 [-0.086, -0.016]",True,"-0.175 [-0.245, -0.110]",True
+Headroom to the oracle,"+0.035 [+0.014, +0.057]",True,"+0.054 [+0.033, +0.077]",True,"+0.095 [+0.055, +0.140]",True

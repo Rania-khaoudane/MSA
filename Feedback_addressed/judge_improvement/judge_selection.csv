@@ -1,0 +1,5 @@
+config,model,prompt,kappa,agreement,parse_rate
+Atlas-Chat-9B / v2,MBZUAI-Paris/Atlas-Chat-9B,v2,0.7969924812030076,0.90625,1.0
+Atlas-Chat-9B / v1,MBZUAI-Paris/Atlas-Chat-9B,v1,0.7761194029850746,0.8958333333333334,1.0
+Qwen2.5-14B-Instruct / v1,Qwen/Qwen2.5-14B-Instruct,v1,0.5648854961832062,0.8020833333333334,1.0
+Qwen2.5-14B-Instruct / v2,Qwen/Qwen2.5-14B-Instruct,v2,0.5365853658536586,0.8020833333333334,1.0
